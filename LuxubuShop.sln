@@ -8,7 +8,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxubuShop.Core", "LuxubuShop.Core\LuxubuShop.Core.csproj", "{0256B484-B277-462F-920E-A85054C65614}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxubuShop.Web", "LuxubuShop.Web\LuxubuShop.Web.csproj", "{8AF6B53F-8AF7-4543-8454-C05849AAB2D7}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0256B484-B277-462F-920E-A85054C65614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0256B484-B277-462F-920E-A85054C65614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0256B484-B277-462F-920E-A85054C65614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0256B484-B277-462F-920E-A85054C65614}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AF6B53F-8AF7-4543-8454-C05849AAB2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AF6B53F-8AF7-4543-8454-C05849AAB2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AF6B53F-8AF7-4543-8454-C05849AAB2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AF6B53F-8AF7-4543-8454-C05849AAB2D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
