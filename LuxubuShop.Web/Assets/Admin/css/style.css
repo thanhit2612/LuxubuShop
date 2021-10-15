@@ -1,0 +1,24 @@
+﻿.form-message ul{
+	list-style: none;
+	padding: 0;
+	text-align: center;
+}
+.pagination li {
+	border: 1px solid #F0F0F0;
+	padding: 3px 10px;
+	cursor: pointer;
+	margin-right: 3px;
+	border-radius: 3px;
+}
+.pagination .active {
+	background: #4E73DF;
+	color: #fff;
+}
+.fa-icon {
+	transform: rotateZ(180deg);
+}
+.img-thumbnail--sive {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+}
