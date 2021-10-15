@@ -1,0 +1,84 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<LuxubuShop.Core.EF.User>
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section pageTitle{ Thành viên }
+
+<div class="btn btn-primary btn-sm">
+	<i class="fas fa-plus-circle"></i>
+	@Html.ActionLink("Thêm mới", "Create", "User", new { @class = "text-white" })
+</div>
+
+<link href="~/Assets/Admin/css/style.css" rel="stylesheet" />
+<!-- Begin Page Content -->
+<div class="container-fluid mt-4">
+	<!-- DataTales Example -->
+	<div class="card shadow mb-4">
+		<div class="card-header py-3"></div>
+		<div class="card-body">
+			@using (Html.BeginForm("Index", "User", FormMethod.Get))
+			{
+				<div class="row justify-content-end">
+					<div class="col-lg-3 col-md-3">
+						<label class="d-flex align-items-center">
+							<input class="form-control form-control-sm" placeholder="Search" name="searchString" value="@ViewBag.SearchString">
+							<button type="submit" class="btn btn-outline-success btn-sm ml-1">
+								<i class="fas fa-search"></i>
+							</button>
+						</label>
+					</div>
+				</div>
+			}
+			<div class="table-responsive mt-3">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+					<thead>
+						<tr class="text-center">
+							<th>Tên người dùng</th>
+							<th>Tên</th>
+							<th>Email</th>
+							<th>Tùy chỉnh</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr class="text-center">
+							<th>Tên người dùng</th>
+							<th>Tên</th>
+							<th>Email</th>
+							<th>Tùy chỉnh</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr id="row_@item.ID">
+								<td>@item.UserName</td>
+								<td>@item.Name</td>
+								<td>@item.Email</td>
+								<td class="d-flex justify-content-md-center">
+									<button type="button" class="btn btn-primary btn-sm mr-1">
+										@Html.ActionLink("Sửa", "Edit", new { @id = item.ID }, new { @class = "text-white" })
+									</button>
+									<button type="button" class="btn btn-danger btn-sm">
+										@Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+										   {
+											   Confirm = "Bạn chắn chắn muốn xóa tài khoản này ?",
+											   OnComplete = "$('#row_" + @item.ID + "').remove()",
+											   HttpMethod = "Delete"
+										   }, new { @class = "text-white" })
+									</button>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+				<div class="pageList">
+					Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+					@Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
