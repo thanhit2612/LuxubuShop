@@ -10,10 +10,10 @@ namespace LuxubuShop.Core.Dao
 {
 	public class UserDao
 	{
-		LuxubuShopDbContext db = null;
+		OnlineShopDbContext db = null;
 		public UserDao()
 		{
-			db = new LuxubuShopDbContext();
+			db = new OnlineShopDbContext();
 		}
 		// Insert Method
 		public long Insert(User entity)

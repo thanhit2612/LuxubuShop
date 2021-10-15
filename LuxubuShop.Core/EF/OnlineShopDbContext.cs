@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace LuxubuShop.Core.EF
 {
-	public partial class LuxubuShopDbContext : DbContext
+	public partial class OnlineShopDbContext : DbContext
 	{
-		public LuxubuShopDbContext()
-			: base("name=LuxubuShopDbContext")
+		public OnlineShopDbContext()
+			: base("name=OnlineShopDbContext")
 		{
 		}
 
