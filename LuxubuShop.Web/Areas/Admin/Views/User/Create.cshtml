@@ -30,7 +30,7 @@
 			<div class="form-group">
 				@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
-					@Html.TextBoxFor(model => model.Password, new { @class = "form-control form-control-sm", @rules = "required|min:" })
+					@Html.TextBoxFor(model => model.Password, new { @class = "form-control form-control-sm", @rules = "required|min:5" })
 					<span class="form-message small text-danger"></span>
 				</div>
 			</div>

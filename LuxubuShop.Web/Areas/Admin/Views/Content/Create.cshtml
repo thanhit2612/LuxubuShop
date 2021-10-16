@@ -1,0 +1,102 @@
+﻿@model LuxubuShop.Core.EF.Content
+
+@{
+	ViewBag.Title = "Create";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section  pageTitle {Thêm mới bài viết}
+
+@section jsFooter {
+	<script>
+		$('#btnSelectImage').on('click', function (e) {
+			e.preventDefault();
+			var finder = new CKFinder();
+			finder.selectActionFunction = function (url) {
+				$('#urlImage').val(url);
+			};
+			finder.popup();
+		})
+	</script>
+	<script>
+		CKEDITOR.replace('Detail');
+	</script>
+}
+
+<div class="btn btn-primary btn-sm">
+	<i class="fas fa-sign-out-alt fa-icon"></i>
+	@Html.ActionLink("Quay lại", "Index", "Content", new { @class = "text-white" })
+</div>
+
+<div class="pt-4 pb-5">
+	@using (Html.BeginForm("Create", "User", FormMethod.Post, new { @id = "register-form" }))
+	{
+		@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-12" })
+			<div class="col-md-12">
+				@Html.TextBoxFor(model => model.Name, new { @class = "form-control form-control-sm", @rules = "required" })
+				<span class="form-message small text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-12" })
+			<div class="col-md-12">
+				@Html.TextAreaFor(model => model.Description, new { @class = "form-control form-control-sm", @rules = "required" })
+				<span class="form-message small text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-12" })
+			<div class="col-md-12">
+				@Html.TextAreaFor(model => model.Detail, new { @class = "form-control", @rules = "required" })
+				<span class="form-message small text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.ProductLink, htmlAttributes: new { @class = "control-label col-md-12" })
+			<div class="col-md-12">
+				@Html.TextBoxFor(model => model.ProductLink,null, new { @class = "form-control form-control-sm col-md-10", @rules = "required" })
+				<span class="form-message small text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.ProductID, htmlAttributes: new { @class = "control-label col-md-12" })
+			<div class="col-md-12">
+				@Html.DropDownListFor(model => model.ProductID, null, new { @class = "form-control form-control-sm col-md-9", @rules = "required" })
+				<span class="form-message small text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-12" })
+			<div class="col-md-12">
+				@Html.TextBoxFor(model => model.Tags, new { @class = "form-control form-control-sm col-md-8", @rules = "required" })
+				<span class="form-message small text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Image, new { @class = "control-label col-md-12" })
+			<div class="col-md-12 d-flex">
+				@Html.TextBoxFor(model => model.Image, new { @class = "form-control form-control-sm col-md-5", @id = "urlImage"})
+				<button href="#" id="btnSelectImage" class="btn btn-warning btn-sm ml-2">Chọn ảnh</button>
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<div class="col-md-12">
+				<button type="submit" class="btn btn-success btn-user btn-block btn-sm">Tạo mới</button>
+			</div>
+		</div>
+	</div>
+	}
+
+</div>

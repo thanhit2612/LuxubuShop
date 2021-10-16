@@ -13,7 +13,7 @@
 </div>
 <div class="pt-4">
 	<div class="col-lg-12">
-		@using (Html.BeginForm("Create", "User", FormMethod.Post, new { @id = "register-form" }))
+		@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @id = "register-form" }))
 		{
 			@Html.AntiForgeryToken()
 
@@ -22,7 +22,7 @@
 				<div class="form-group">
 					@Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-12" })
 					<div class="col-md-12">
-						@Html.TextBoxFor(model => model.UserName, new { @class = "form-control form-control-sm", @rules = "required" })
+						@Html.TextBoxFor(model => model.UserName, new { @class = "form-control form-control-sm", @disabled = "disabled", @rules = "required"})
 						<span class="form-message small text-danger"></span>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 				<div class="form-group">
 					@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-12" })
 					<div class="col-md-12">
-						@Html.TextBoxFor(model => model.Password, new { @class = "form-control form-control-sm", @rules = "required|min:" })
+						@Html.TextBoxFor(model => model.Password, new { @class = "form-control form-control-sm", @rules = "required|min:5" })
 						<span class="form-message small text-danger"></span>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 
 				<div class="form-group">
 					<div class="col-md-12">
-						<button type="submit" class="btn btn-success btn-user btn-block btn-sm">Tạo mới</button>
+						<button type="submit" class="btn btn-success btn-user btn-block btn-sm">Lưu</button>
 					</div>
 				</div>
 			</div>

@@ -34,5 +34,9 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 			}
 			return View("Index");
 		}
+		public ActionResult Logout()
+		{
+			return RedirectToAction("Index");
+		}
 	}
 }

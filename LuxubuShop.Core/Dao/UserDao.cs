@@ -33,7 +33,7 @@ namespace LuxubuShop.Core.Dao
 				{
 					user.Password = entity.Password;
 				}
-				/*user.Email = entity.Email;*/
+				user.Email = entity.Email;
 				db.SaveChanges();
 				return true;
 			}
