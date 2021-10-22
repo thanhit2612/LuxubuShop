@@ -18,41 +18,40 @@
 			@Html.AntiForgeryToken()
 
 			<div class="form-horizontal">
-				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 				<div class="form-group">
 					@Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-12" })
 					<div class="col-md-12">
-						@Html.TextBoxFor(model => model.UserName, new { @class = "form-control form-control-sm", @disabled = "disabled", @rules = "required"})
-						<span class="form-message small text-danger"></span>
+						@Html.TextBoxFor(model => model.UserName, new { @class = "form-control form-control-sm", @rules = "required" })
+						<small class="form-message text-danger"></small>
 					</div>
 				</div>
 
 				<div class="form-group">
 					@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-12" })
 					<div class="col-md-12">
-						@Html.TextBoxFor(model => model.Password, new { @class = "form-control form-control-sm", @rules = "required|min:5" })
-						<span class="form-message small text-danger"></span>
+						@Html.TextBoxFor(model => model.Password, new { @class = "form-control form-control-sm", @rules = "required|min:6" })
+						<small class="form-message text-danger"></small>
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-12" })
+					<div class="col-md-12">
+						@Html.TextBoxFor(model => model.Name, new { @class = "form-control form-control-sm", @rules = "required" })
+						<small class="form-message text-danger"></small>
 					</div>
 				</div>
 
 				<div class="form-group">
 					@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-12" })
 					<div class="col-md-12">
-						@Html.TextBoxFor(model => model.Email, new { @class = "form-control form-control-sm", @type = "email", rules = "required|email" })
-						<span class="form-message small text-danger"></span>
+						@Html.TextBoxFor(model => model.Email, new { @class = "form-control form-control-sm", @rules = "required|email" })
+						<small class="form-message text-danger"></small>
 					</div>
 				</div>
 				<div class="form-group">
-					@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-12" })
 					<div class="col-md-12">
-						@Html.TextBoxFor(model => model.Name, new { @class = "form-control form-control-sm", @rules = "required" })
-						<span class="form-message small text-danger"></span>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="col-md-12">
-						<button type="submit" class="btn btn-success btn-user btn-block btn-sm">Lưu</button>
+						<button type="submit" class="btn btn-primary btn-user btn-block btn-sm">Lưu</button>
 					</div>
 				</div>
 			</div>

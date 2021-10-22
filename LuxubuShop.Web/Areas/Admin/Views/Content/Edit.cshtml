@@ -1,10 +1,9 @@
 ﻿@model LuxubuShop.Core.EF.Content
 
 @{
-	ViewBag.Title = "Edit";
+	ViewBag.Title = "Create";
 	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
 @section  pageTitle {Chỉnh sửa bài viết}
 
 @section jsFooter {
@@ -29,17 +28,15 @@
 </div>
 
 <div class="pt-4 pb-5">
-	@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @id = "register-form" }))
+	@using (Html.BeginForm("Edit", "Content", FormMethod.Post, new { @id = "register-form" }))
 	{
 		@Html.AntiForgeryToken()
-
 		<div class="form-horizontal">
-			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 			<div class="form-group">
 				@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
 					@Html.TextBoxFor(model => model.Name, new { @class = "form-control form-control-sm", @rules = "required" })
-					<span class="form-message small text-danger"></span>
+					<small class="form-message text-danger"></small>
 				</div>
 			</div>
 
@@ -47,7 +44,7 @@
 				@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
 					@Html.TextAreaFor(model => model.Description, new { @class = "form-control form-control-sm", @rules = "required" })
-					<span class="form-message small text-danger"></span>
+					<small class="form-message text-danger"></small>
 				</div>
 			</div>
 
@@ -55,15 +52,15 @@
 				@Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
 					@Html.TextAreaFor(model => model.Detail, new { @class = "form-control", @rules = "required" })
-					<span class="form-message small text-danger"></span>
+					<small class="form-message text-danger"></small>
 				</div>
 			</div>
 
 			<div class="form-group">
 				@Html.LabelFor(model => model.ProductLink, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
-					@Html.TextBoxFor(model => model.ProductLink, null, new { @class = "form-control form-control-sm col-md-10", @rules = "required" })
-					<span class="form-message small text-danger"></span>
+					@Html.TextBoxFor(model => model.ProductLink, new { @class = "form-control form-control-sm", @rules = "required" })
+					<small class="form-message text-danger"></small>
 				</div>
 			</div>
 
@@ -71,7 +68,7 @@
 				@Html.LabelFor(model => model.ProductID, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
 					@Html.DropDownListFor(model => model.ProductID, null, new { @class = "form-control form-control-sm col-md-9", @rules = "required" })
-					<span class="form-message small text-danger"></span>
+					<small class="form-message text-danger"></small>
 				</div>
 			</div>
 
@@ -79,7 +76,7 @@
 				@Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
 					@Html.TextBoxFor(model => model.Tags, new { @class = "form-control form-control-sm col-md-8", @rules = "required" })
-					<span class="form-message small text-danger"></span>
+					<small class="form-message text-danger"></small>
 				</div>
 			</div>
 
@@ -88,14 +85,13 @@
 				<div class="col-md-12 d-flex">
 					@Html.TextBoxFor(model => model.Image, new { @class = "form-control form-control-sm col-md-5", @id = "urlImage", @rules = "required" })
 					<button href="#" id="btnSelectImage" class="btn btn-warning btn-sm ml-2">Chọn ảnh</button>
-					<span class="form-message small text-danger"></span>
+					<small class="form-message text-danger"></small>
 				</div>
 			</div>
 
-
 			<div class="form-group">
 				<div class="col-md-12">
-					<button type="submit" class="btn btn-success btn-user btn-block btn-sm">Tạo mới</button>
+					<button type="submit" class="btn btn-primary btn-user btn-block btn-sm">Lưu</button>
 				</div>
 			</div>
 		</div>

@@ -31,7 +31,7 @@
 				</div>
 			}
 			<div class="table-responsive mt-3">
-				<table class="table table-bordered" id="dataTable" width="100%">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr class="text-center">
 							<th>Tiêu đề</th>
@@ -58,9 +58,9 @@
 							<tr id="row_@item.ID" class="text-center">
 								<td>@item.Name</td>
 								<td>@item.CreatedBy</td>
-								<td>@Html.DisplayFor(model => item.ProductID)</td>
+								<td>@item.ProductID</td>
 								<td>@item.Tags</td>
-								<td>@item.CreatedDate</td>
+								<td>@string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</td>
 								<td class="justify-content-md-center">
 									<button type="button" class="btn btn-primary btn-sm mr-1">
 										@Html.ActionLink("Sửa", "Edit", new { @id = item.ID }, new { @class = "text-white" })

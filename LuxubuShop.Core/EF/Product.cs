@@ -17,9 +17,6 @@ namespace LuxubuShop.Core.EF
         [StringLength(250)]
         public string Link { get; set; }
 
-        [StringLength(250)]
-        public string MetaTitle { get; set; }
-
         [StringLength(500)]
         public string Description { get; set; }
 
@@ -36,6 +33,21 @@ namespace LuxubuShop.Core.EF
         [Column(TypeName = "ntext")]
         public string Detail { get; set; }
 
+        public DateTime? TopHot { get; set; }
+
+        public decimal? Vote { get; set; }
+
+        public int? ClickCount { get; set; }
+
+        [StringLength(250)]
+        public string MetaTitle { get; set; }
+
+        [StringLength(250)]
+        public string MetaKeywords { get; set; }
+
+        [StringLength(250)]
+        public string MetaDescriptions { get; set; }
+
         public DateTime? CreatedDate { get; set; }
 
         [StringLength(50)]
@@ -46,18 +58,6 @@ namespace LuxubuShop.Core.EF
         [StringLength(50)]
         public string ModifiedBy { get; set; }
 
-        [StringLength(250)]
-        public string MetaKeywords { get; set; }
-
-        [StringLength(250)]
-        public string MetaDescriptions { get; set; }
-
         public bool? Status { get; set; }
-
-        public DateTime? TopHot { get; set; }
-
-        public decimal? Vote { get; set; }
-
-        public int? ClickCount { get; set; }
     }
 }
