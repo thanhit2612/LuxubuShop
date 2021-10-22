@@ -20,6 +20,38 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 			ViewBag.SearchString = searchString;
 			return View(model);
 		}
+
+		// GET: Admin/User/Create
+		[HttpGet]
+		public ActionResult Create()
+		{
+			return View();
+		}
+		// POST: Admin/User/Create
+		[HttpPost]
+		public ActionResult Create(User user)
+		{
+			if (ModelState.IsValid)
+			{
+				var dao = new UserDao();
+				var encryptedMd5Pas = Encryptor.MD5Hash(user.Password);
+				user.Password = encryptedMd5Pas;
+				user.CreatedDate = DateTime.Now;
+				long id = dao.Insert(user);
+
+				if (id > 0)
+				{
+					SetAlert("Thêm mới tài khoản thành công !", "success");
+					return RedirectToAction("Create", "User");
+				}
+				else
+				{
+					SetAlert("Thêm mới tài khoản thất bại !", "danger");
+				}
+			}
+			return View("Index");
+		}
+
 		// GET: Admin/User/Edit
 		public ActionResult Edit(int id)
 		{
@@ -52,36 +84,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 			}
 			return View("Index");
 		}
-		// GET: Admin/User/Create
-		[HttpGet]
-		public ActionResult Create()
-		{
-			return View();
-		}
-		// POST: Admin/User/Create
-		[HttpPost]
-		public ActionResult Create(User user)
-		{
 
-			if (ModelState.IsValid)
-			{
-				var dao = new UserDao();
-				var encryptedMd5Pas = Encryptor.MD5Hash(user.Password);
-				user.Password = encryptedMd5Pas;
-
-				long id = dao.Insert(user);
-				if (id > 0)
-				{
-					SetAlert("Thêm mới tài khoản thành công !", "success");
-					return RedirectToAction("Create", "User");
-				}
-				else
-				{
-					SetAlert("Thêm mới tài khoản thất bại !", "danger");
-				}
-			}
-			return View("Index");
-		}
 		// DELETE: Admin/User/Delete
 		[HttpDelete]
 		public ActionResult Delete(int id)

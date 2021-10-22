@@ -9,10 +9,10 @@ namespace LuxubuShop.Core.Dao
 {
 	public class ProductDao
 	{
-		OnlineShopDbContext db = null;
+		LuxubuShopDbContext db = null;
 		public ProductDao()
 		{
-			db = new OnlineShopDbContext();
+			db = new LuxubuShopDbContext();
 		}
 		public List<Product> ListAll()
 		{

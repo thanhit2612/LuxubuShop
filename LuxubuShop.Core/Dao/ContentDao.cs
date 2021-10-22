@@ -10,14 +10,10 @@ namespace LuxubuShop.Core.Dao
 {
 	public class ContentDao
 	{
-		OnlineShopDbContext db = null;
+		LuxubuShopDbContext db = null;
 		public ContentDao()
 		{
-			db = new OnlineShopDbContext();
-		}
-		public Content GetContentByID(long id)
-		{
-			return db.Contents.Find(id);
+			db = new LuxubuShopDbContext();
 		}
 		// Get Method
 		public IEnumerable<Content> ListAllPaging(string searchString, int page, int pageSize)
@@ -29,17 +25,17 @@ namespace LuxubuShop.Core.Dao
 			}
 			return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
 		}
-		// ViewDetail
-		public Content ViewDetail(int id)
-		{
-			return db.Contents.Find(id);
-		}
+		
 		// Insert Method
 		public long Insert(Content entity)
 		{
 			db.Contents.Add(entity);
 			db.SaveChanges();
 			return entity.ID;
+		}
+		public Content GetContentByID(long id)
+		{
+			return db.Contents.Find(id);
 		}
 		// Update Method
 		public bool Update(Content entity)
@@ -48,6 +44,12 @@ namespace LuxubuShop.Core.Dao
 			{
 				var content = db.Contents.Find(entity.ID);
 				content.Name = entity.Name;
+				content.Description = entity.Description;
+				content.Detail = entity.Detail;
+				content.ProductLink = entity.ProductLink;
+				content.ProductID = entity.ProductID;
+				content.Tags = entity.Tags;
+				content.Image = entity.Image;
 				db.SaveChanges();
 				return true;
 			}
@@ -55,6 +57,10 @@ namespace LuxubuShop.Core.Dao
 			{
 				return false;
 			}
+		}
+		public Content ViewDetail(int id)
+		{
+			return db.Contents.Find(id);
 		}
 		// Delete Method
 		public bool Delete(int id)

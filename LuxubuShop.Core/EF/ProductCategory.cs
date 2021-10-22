@@ -9,13 +9,11 @@ namespace LuxubuShop.Core.EF
     [Table("ProductCategory")]
     public partial class ProductCategory
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long ID { get; set; }
 
         [StringLength(250)]
         public string Name { get; set; }
-
-        [StringLength(250)]
-        public string MetaTitle { get; set; }
 
         public long? ParentID { get; set; }
 
@@ -23,6 +21,17 @@ namespace LuxubuShop.Core.EF
 
         [StringLength(250)]
         public string SeoTitle { get; set; }
+
+        [StringLength(250)]
+        public string MetaTitle { get; set; }
+
+        [StringLength(250)]
+        public string MetaKeywords { get; set; }
+
+        [StringLength(250)]
+        public string MetaDescriptions { get; set; }
+
+        public bool? ShowOnHome { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
@@ -34,14 +43,6 @@ namespace LuxubuShop.Core.EF
         [StringLength(50)]
         public string ModifiedBy { get; set; }
 
-        [StringLength(250)]
-        public string MetaKeywords { get; set; }
-
-        [StringLength(250)]
-        public string MetaDescriptions { get; set; }
-
         public bool? Status { get; set; }
-
-        public bool? ShowOnHome { get; set; }
     }
 }

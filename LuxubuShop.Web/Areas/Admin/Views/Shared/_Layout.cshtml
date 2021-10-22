@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@{TempData.Keep("Name");}
+@{TempData.Keep("UserName");}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -46,7 +48,7 @@
 					<!-- Topbar Search -->
 					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+							<input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
 								   aria-label="Search" aria-describedby="basic-addon2">
 							<div class="input-group-append">
 								<button class="btn btn-primary" type="button">
@@ -214,7 +216,7 @@
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 							   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">@TempData["Name"]</span>
 								<img class="img-profile rounded-circle"
 									 src="~/Assets/Admin/img/undraw_profile.svg">
 							</a>
@@ -283,15 +285,15 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Xác nhận đăng xuất!</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+				<div class="modal-body">Bạn chắn chắn muốn đăng xuất ?</div>
 				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="/Admin/Login">Logout</a>
+					<a class="btn btn-primary" href="/Admin/Login/Logout">Đồng ý</a>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Thoát</button>
 				</div>
 			</div>
 		</div>
