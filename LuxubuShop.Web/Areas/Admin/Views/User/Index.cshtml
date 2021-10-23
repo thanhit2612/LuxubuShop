@@ -59,8 +59,8 @@
 								<td>@item.Name</td>
 								<td>@item.Email</td>
 								<td>@string.Format("{0:dd-MM-yyyy}", @item.CreatedDate)</td>
-								<td class="d-flex justify-content-md-center">
-									<button type="button" class="btn btn-primary btn-sm mr-1">
+								<td class="d-flex justify-content-md-around flex-md-wrap">
+									<button type="button" class="btn btn-primary btn-sm">
 										@Html.ActionLink("Sửa", "Edit", new { @id = item.ID }, new { @class = "text-white" })
 									</button>
 									<button type="button" class="btn btn-danger btn-sm">

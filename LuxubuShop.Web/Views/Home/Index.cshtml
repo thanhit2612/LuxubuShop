@@ -1,0 +1,94 @@
+﻿@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	var listNewProduct = (List<LuxubuShop.Core.EF.Product>)ViewBag.NewProducts;
+	var listFeatureProduct = (List<LuxubuShop.Core.EF.Product>)ViewBag.featureProducts;
+}
+
+@section header_slider {
+	<div class="header_slide">
+		<div class="header_bottom_left">
+			@{ Html.RenderAction("ProductCategory", "Product");}
+		</div>
+		<div class="header_bottom_right">
+			<div class="slider">
+				<div id="slider">
+					<div class="owl-carousel owl-theme" id="banner-slider">
+						<div class="item">
+							<a href="">
+								<img src="~/Assets/Client/images/banner1.jpg" alt="" class="slider-img">
+							</a>
+						</div>
+						<div class="item">
+							<a href="">
+								<img src="~/Assets/Client/images/banner2.jpg" alt="" class="slider-img">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+}
+<div class="content">
+	<div class="content_top">
+		<div class="heading">
+			<h3>Sản phẩm mới</h3>
+		</div>
+		<div class="see">
+			<p><a href="/san-pham">Xem tất cả</a></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="section group">
+		@foreach (var item in listNewProduct)
+		{
+			var url = item.Link;
+			<div class="grid_1_of_4 images_1_of_4">
+				<a href="@url"><img src="@item.Image" alt="@item.Name" /></a>
+				<h2>@item.Name</h2>
+				<div class="price-details">
+					<div class="price-number">
+						<p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ")</span></p>
+					</div>
+					<div class="add-cart">
+						<h4><a href="@url">Xem sản phẩm</a></h4>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		}
+	</div>
+	<div class="content_bottom">
+		<div class="heading">
+			<h3>Sản phẩm nổi bật</h3>
+		</div>
+		<div class="see">
+			<p><a href="#">Xem tất cả</a></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="section group">
+		@foreach (var item in listFeatureProduct)
+		{
+			var url = item.Link;
+			<div class="grid_1_of_4 images_1_of_4">
+				<a href="@url"><img src="@item.Image" alt="@item.Name" /></a>
+				<h2>@item.Name</h2>
+				<div class="price-details">
+					<div class="price-number">
+						<p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ")</span></p>
+					</div>
+					<div class="add-cart">
+						<h4><a href="@url">Xem sản phẩm</a></h4>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+

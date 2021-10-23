@@ -1,0 +1,12 @@
+﻿@model List<LuxubuShop.Core.EF.Menu>
+<div class="account_desc">
+	<ul>
+		@foreach (var item in Model)
+		{
+			<li>
+				<a href="@item.Link" target="@item.Target">@item.Text</a>
+			</li>
+		}
+		<div class="clear"></div>
+	</ul>
+</div>
