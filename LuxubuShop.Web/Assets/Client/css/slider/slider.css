@@ -1,0 +1,11 @@
+.slider .slider-img{
+	width: 100%;
+	border-radius: 2px;
+}
+.slider .owl-carousel .owl-stage-outer {
+	z-index: -1;
+}
+.slider .owl-theme .owl-nav.disabled + .owl-dots {
+	margin-top: -25px;
+	z-index: 1;
+}

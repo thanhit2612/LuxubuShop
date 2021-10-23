@@ -2814,6 +2814,37 @@
     <Content Include="Assets\Admin\vendor\jquery\jquery.min.js" />
     <Content Include="Assets\Admin\vendor\jquery\jquery.slim.js" />
     <Content Include="Assets\Admin\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Assets\Client\css\easy-responsive-tabs.css" />
+    <Content Include="Assets\Client\css\global.css" />
+    <Content Include="Assets\Client\css\slider\owl.carousel.min.css" />
+    <Content Include="Assets\Client\css\slider\owl.theme.default.min.css" />
+    <Content Include="Assets\Client\css\slider\slider.css" />
+    <Content Include="Assets\Client\css\style.css" />
+    <Content Include="Assets\Client\images\arrow_up.png" />
+    <Content Include="Assets\Client\images\banner1.jpg" />
+    <Content Include="Assets\Client\images\banner2.jpg" />
+    <Content Include="Assets\Client\images\banner3.jpg" />
+    <Content Include="Assets\Client\images\banner4.jpg" />
+    <Content Include="Assets\Client\images\compare.png" />
+    <Content Include="Assets\Client\images\dribbble.png" />
+    <Content Include="Assets\Client\images\drop_arrow-hover.png" />
+    <Content Include="Assets\Client\images\drop_arrow.png" />
+    <Content Include="Assets\Client\images\facebook.png" />
+    <Content Include="Assets\Client\images\linkedin.png" />
+    <Content Include="Assets\Client\images\list-img.png" />
+    <Content Include="Assets\Client\images\logo.png" />
+    <Content Include="Assets\Client\images\price-rating.png" />
+    <Content Include="Assets\Client\images\quality-rating.png" />
+    <Content Include="Assets\Client\images\search.png" />
+    <Content Include="Assets\Client\images\skype.png" />
+    <Content Include="Assets\Client\images\tag.png" />
+    <Content Include="Assets\Client\images\twitter.png" />
+    <Content Include="Assets\Client\images\value-rating.png" />
+    <Content Include="Assets\Client\images\wishlist.png" />
+    <Content Include="Assets\Client\js\movetop.js" />
+    <Content Include="Assets\Client\js\slider\jquery.min.js" />
+    <Content Include="Assets\Client\js\slider\owl.carousel.js" />
+    <Content Include="Assets\Client\js\slider\slider.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -3038,6 +3069,8 @@
     <Content Include="Areas\Admin\Views\ProductCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\Edit.cshtml" />
+    <Content Include="Assets\Client\font\Amble-Regular-webfont.ttf" />
+    <Content Include="Assets\Client\images\Thumbs.db" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -3059,6 +3092,8 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3068,6 +3103,12 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\MainMenu.cshtml" />
+    <Content Include="Views\Shared\ProductCategory.cshtml" />
+    <Content Include="Views\Shared\TopMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3077,9 +3118,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="UploadFiles\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LuxubuShop.Core\LuxubuShop.Core.csproj">
