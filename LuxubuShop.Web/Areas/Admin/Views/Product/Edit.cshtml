@@ -1,35 +1,34 @@
-﻿@model LuxubuShop.Core.EF.Content
+﻿@model LuxubuShop.Core.EF.Product
 
 @{
 	ViewBag.Title = "Create";
 	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@section  pageTitle {Thêm mới bài viết}
+@section  pageTitle {Thêm mới Sản phẩm}
 
 @section jsFooter {
-		<script>
-			$('#btnSelectImage').on('click', function (e) {
-				e.preventDefault();
-				var finder = new CKFinder();
-				finder.selectActionFunction = function (url) {
-					$('#urlImage').val(url);
-				};
-				finder.popup();
-			})
-		</script>
-		<script>
-			CKEDITOR.replace('editor');
-		</script>
-
+	<script>
+		$('#btnSelectImage').on('click', function (e) {
+			e.preventDefault();
+			var finder = new CKFinder();
+			finder.selectActionFunction = function (url) {
+				$('#urlImage').val(url);
+			};
+			finder.popup();
+		})
+	</script>
+	<script>
+		CKEDITOR.replace('Detail');
+	</script>
 }
 
 <div class="btn btn-primary btn-sm">
 	<i class="fas fa-sign-out-alt fa-icon"></i>
-	@Html.ActionLink("Quay lại", "Index", "Content", new { @class = "text-white" })
+	@Html.ActionLink("Quay lại", "Index", "Product", new { @class = "text-white" })
 </div>
 
 <div class="pt-4 pb-5">
-	@using (Html.BeginForm("Create", "Content", FormMethod.Post, new { @id = "register-form" }))
+	@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { @id = "register-form" }))
 	{
 		@Html.AntiForgeryToken()
 		<div class="form-horizontal">
@@ -52,30 +51,22 @@
 			<div class="form-group">
 				@Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
-					@Html.TextAreaFor(model => model.Detail, new { @class = "form-control", @id= "editor" })
+					@Html.TextAreaFor(model => model.Detail, new { @class = "form-control" })
 				</div>
 			</div>
 
 			<div class="form-group">
-				@Html.LabelFor(model => model.ProductLink, htmlAttributes: new { @class = "control-label col-md-12" })
+				@Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
-					@Html.TextBoxFor(model => model.ProductLink, new { @class = "form-control form-control-sm", @rules = "required" })
+					@Html.TextBoxFor(model => model.Link, new { @class = "form-control form-control-sm col-md-10", @rules = "required" })
 					<small class="form-message text-danger"></small>
 				</div>
 			</div>
 
 			<div class="form-group">
-				@Html.LabelFor(model => model.ProductID, htmlAttributes: new { @class = "control-label col-md-12" })
+				@Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
-					@Html.DropDownListFor(model => model.ProductID, null, new { @class = "form-control form-control-sm col-md-9", @rules = "required" })
-					<small class="form-message text-danger"></small>
-				</div>
-			</div>
-
-			<div class="form-group">
-				@Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-12" })
-				<div class="col-md-12">
-					@Html.TextBoxFor(model => model.Tags, new { @class = "form-control form-control-sm col-md-8", @rules = "required" })
+					@Html.DropDownListFor(model => model.CategoryID, null, new { @class = "form-control form-control-sm col-md-9", @rules = "required" })
 					<small class="form-message text-danger"></small>
 				</div>
 			</div>
@@ -88,9 +79,9 @@
 				</div>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group pt-3">
 				<div class="col-md-12">
-					<button type="submit" class="btn btn-primary btn-user btn-block btn-sm">Tạo mới</button>
+					<button type="submit" class="btn btn-primary btn-user btn-block btn-sm">Lưu</button>
 				</div>
 			</div>
 		</div>

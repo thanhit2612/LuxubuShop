@@ -1,33 +1,31 @@
 ﻿using LuxubuShop.Core.Dao;
-using LuxubuShop.Core.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList.Mvc;
+using LuxubuShop.Core.EF;
 
 namespace LuxubuShop.Web.Areas.Admin.Controllers
 {
-    public class ContentController : BaseController
+    public class ProductController : BaseController
     {
-        // Lấy ra danh sách sản phẩm
+        // Lấy ra danh sách danh mục
         public void SetViewBag(long? selectedId = null)
         {
-            var dao = new ProductDao();
-            ViewBag.ProductID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
+            var dao = new ProductCategoryDao();
+            ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
         }
-
-        // GET: Admin/Content
+        // GET: Admin/Product
         public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
         {
-            var dao = new ContentDao();
+            var dao = new ProductDao();
             var model = dao.ListAllPaging(searchString, page, pageSize);
             ViewBag.SearchString = searchString;
             SetViewBag();
             return View(model);
         }
-
         // GET: Admin/Content/Create
         [HttpGet]
         public ActionResult Create()
@@ -38,24 +36,24 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 
         // POST: Admin/Content/Create
         [HttpPost, ValidateInput(false)]
-        public ActionResult Create(Content content)
+        public ActionResult Create(Product product)
         {
-			if (ModelState.IsValid)
-			{
-                var dao = new ContentDao();
+            if (ModelState.IsValid)
+            {
+                var dao = new ProductDao();
                 TempData.Keep("UserName");
                 var userName = TempData["UserName"];
-                content.CreatedBy = (string)userName;
-                content.CreatedDate = DateTime.Now;
-                long id = dao.Insert(content);
+                product.CreatedBy = (string)userName;
+                product.CreatedDate = DateTime.Now;
+                long id = dao.Insert(product);
                 if (id > 0)
                 {
-                    SetAlert("Thêm mới bài viết thành công !", "success");
+                    SetAlert("Thêm mới sản phẩm thành công !", "success");
                     return RedirectToAction("Create", "Content");
                 }
                 else
                 {
-                    SetAlert("Thêm mới bài viết thất bại !", "danger");
+                    SetAlert("Thêm mới sản phẩm thất bại !", "danger");
                 }
             }
             SetViewBag();
@@ -65,33 +63,33 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
         // GET: Admin/Content/Edit/5
         public ActionResult Edit(int id)
         {
-            var dao = new ContentDao();
-            var content = dao.ViewDetail(id);
+            var dao = new ProductDao();
+            var product = dao.ViewDetail(id);
 
-            var productId = dao.GetContentByID(id);
-            SetViewBag(productId.ProductID);
-            return View(content);
+            var categoryId = dao.GetProductCategoryByID(id);
+            SetViewBag(categoryId.CategoryID);
+            return View(product);
         }
 
         // POST: Admin/Content/Edit/5
         [HttpPost, ValidateInput(false)]
-        public ActionResult Edit(Content model)
+        public ActionResult Edit(Product model)
         {
             if (ModelState.IsValid)
             {
-                var dao = new ContentDao();
+                var dao = new ProductDao();
                 var result = dao.Update(model);
                 if (result)
                 {
-                    SetAlert("Cập nhật bài viết thành công !", "success");
+                    SetAlert("Cập nhật sản phẩm thành công !", "success");
                     return RedirectToAction("Index", "Content");
                 }
                 else
                 {
-                    SetAlert("Cập nhật bài viết thất bại !", "error");
+                    SetAlert("Cập nhật sản phẩm thất bại !", "error");
                 }
             }
-            SetViewBag(model.ProductID);
+            SetViewBag(model.CategoryID);
             return View("Index");
         }
 
@@ -101,7 +99,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
         {
             try
             {
-                new ContentDao().Delete(id);
+                new ProductDao().Delete(id);
                 return RedirectToAction("Index");
             }
             catch
