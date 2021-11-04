@@ -1,23 +1,25 @@
 ﻿@using PagedList.Mvc;
-@model PagedList.IPagedList<LuxubuShop.Core.EF.Content>
+@model PagedList.IPagedList<LuxubuShop.Core.EF.Menu>
 @{
 	ViewBag.Title = "Index";
 	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@section pageTitle{ Bài viết }
+@section pageTitle{ Menu }
 
 <div class="btn btn-primary btn-sm">
 	<i class="fas fa-plus-circle"></i>
-	@Html.ActionLink("Thêm mới", "Create", "Content", new { @class = "text-white" })
+	@Html.ActionLink("Thêm mới", "Create", "Menu", new { @class = "text-white" })
 </div>
 
+<link href="~/Assets/Admin/css/style.css" rel="stylesheet" />
 <!-- Begin Page Content -->
 <div class="container-fluid mt-4">
-	<!-- DataTales Example -->
+
+	<!-- Danh sách -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3"></div>
 		<div class="card-body">
-			@using (Html.BeginForm("Index", "Content", FormMethod.Get))
+			@using (Html.BeginForm("Index", "Menu", FormMethod.Get))
 			{
 				<div class="row justify-content-end">
 					<div class="col-lg-3 col-md-3">
@@ -34,33 +36,28 @@
 				<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr class="text-center">
-							<th>Tiêu đề</th>
-							<th>Tác giả</th>
-							<th>Chuyên mục</th>
-							<th>Thẻ</th>
-							<th>Ngày tạo</th>
-							<th>Tùy chỉnh</th>
+							<th>Tên Menu</th>
+							<th>Loại Menu</th>
+							<th>Trạng Thái</th>
+							<th>Tùy Chỉnh</th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr class="text-center">
-							<th>Tiêu đề</th>
-							<th>Tác giả</th>
-							<th>Chuyên mục</th>
-							<th>Thẻ</th>
-							<th>Ngày tạo</th>
-							<th>Tùy chỉnh</th>
+						<tr class="text-center">
+							<th>Tên Menu</th>
+							<th>Loại Menu</th>
+							<th>Trạng Thái</th>
+							<th>Tùy Chỉnh</th>
 						</tr>
 					</tfoot>
 					<tbody>
 						@foreach (var item in Model)
 						{
 							<tr id="row_@item.ID" class="text-center">
-								<td>@item.Name</td>
-								<td>@item.CreatedBy</td>
-								<td>@item.ProductID</td>
-								<td>@item.Tags</td>
-								<td>@string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</td>
+								<td>@item.Text</td>
+								<td>@item.TypeID</td>
+								<td>@item.Status</td>
 								<td class="d-flex justify-content-md-around flex-md-wrap">
 									<button type="button" class="btn btn-primary btn-sm">
 										@Html.ActionLink("Sửa", "Edit", new { @id = item.ID }, new { @class = "text-white" })

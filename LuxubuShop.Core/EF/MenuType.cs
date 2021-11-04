@@ -13,5 +13,7 @@ namespace LuxubuShop.Core.EF
 
         [StringLength(50)]
         public string Name { get; set; }
+
+        public bool? Status { get; set; }
     }
 }

@@ -17,13 +17,13 @@ namespace LuxubuShop.Core.EF
         [StringLength(250)]
         public string Link { get; set; }
 
+        public int? DisplayOrder { get; set; }
+
         [StringLength(50)]
         public string Target { get; set; }
 
+        public bool Status { get; set; }
+
         public int? TypeID { get; set; }
-
-        public int? DisplayOrder { get; set; }
-
-        public bool? Status { get; set; }
     }
 }

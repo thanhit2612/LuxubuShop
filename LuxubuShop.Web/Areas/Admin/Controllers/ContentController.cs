@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList.Mvc;
+using LuxubuShop.Web.Common;
 
 namespace LuxubuShop.Web.Areas.Admin.Controllers
 {
@@ -43,10 +44,8 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 			if (ModelState.IsValid)
 			{
                 var dao = new ContentDao();
-                TempData.Keep("UserName");
-                var userName = TempData["UserName"];
-                content.CreatedBy = (string)userName;
-                content.CreatedDate = DateTime.Now;
+                var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+                content.CreatedBy = session.UserName;
                 long id = dao.Insert(content);
                 if (id > 0)
                 {

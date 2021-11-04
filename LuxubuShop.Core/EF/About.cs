@@ -17,11 +17,11 @@ namespace LuxubuShop.Core.EF
         [StringLength(500)]
         public string Description { get; set; }
 
-        [StringLength(250)]
-        public string Image { get; set; }
-
         [Column(TypeName = "ntext")]
         public string Detail { get; set; }
+
+        [StringLength(250)]
+        public string Image { get; set; }
 
         [StringLength(250)]
         public string MetaTitle { get; set; }
@@ -36,11 +36,6 @@ namespace LuxubuShop.Core.EF
 
         [StringLength(50)]
         public string CreatedBy { get; set; }
-
-        public DateTime? ModifiedDate { get; set; }
-
-        [StringLength(50)]
-        public string ModifiedBy { get; set; }
 
         public bool? Status { get; set; }
     }

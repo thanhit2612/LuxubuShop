@@ -59,8 +59,8 @@ namespace LuxubuShop.Core.Dao
 			{
 				var product = db.Products.Find(entity.ID);
 				product.Name = entity.Name;
-				product.Link = entity.Link;
-				product.Description = entity.Description;
+				product.ProductLink = entity.ProductLink;
+				product.MetaDescriptions = entity.MetaDescriptions;
 				product.Image = entity.Image;
 				product.Price = entity.Price;
 				product.CategoryID = entity.CategoryID;

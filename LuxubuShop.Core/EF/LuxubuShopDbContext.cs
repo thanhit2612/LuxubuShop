@@ -13,16 +13,16 @@ namespace LuxubuShop.Core.EF
 		}
 
 		public virtual DbSet<About> Abouts { get; set; }
-		public virtual DbSet<Category> Categories { get; set; }
 		public virtual DbSet<Content> Contents { get; set; }
 		public virtual DbSet<ContentTag> ContentTags { get; set; }
 		public virtual DbSet<Feedback> Feedbacks { get; set; }
 		public virtual DbSet<Menu> Menus { get; set; }
 		public virtual DbSet<MenuType> MenuTypes { get; set; }
 		public virtual DbSet<Product> Products { get; set; }
+		public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+		public virtual DbSet<Slide> Slides { get; set; }
 		public virtual DbSet<Tag> Tags { get; set; }
 		public virtual DbSet<User> Users { get; set; }
-		public virtual DbSet<ProductCategory> ProductCategories { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
@@ -38,40 +38,12 @@ namespace LuxubuShop.Core.EF
 				.Property(e => e.CreatedBy)
 				.IsUnicode(false);
 
-			modelBuilder.Entity<About>()
-				.Property(e => e.ModifiedBy)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<Category>()
-				.Property(e => e.MetaTitle)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<Category>()
-				.Property(e => e.MetaDescriptions)
-				.IsFixedLength();
-
-			modelBuilder.Entity<Category>()
-				.Property(e => e.CreatedBy)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<Category>()
-				.Property(e => e.ModifiedBy)
-				.IsUnicode(false);
-
 			modelBuilder.Entity<Content>()
 				.Property(e => e.MetaTitle)
 				.IsUnicode(false);
 
 			modelBuilder.Entity<Content>()
-				.Property(e => e.MetaDescriptions)
-				.IsFixedLength();
-
-			modelBuilder.Entity<Content>()
 				.Property(e => e.CreatedBy)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<Content>()
-				.Property(e => e.ModifiedBy)
 				.IsUnicode(false);
 
 			modelBuilder.Entity<ContentTag>()
@@ -83,23 +55,27 @@ namespace LuxubuShop.Core.EF
 				.HasPrecision(18, 0);
 
 			modelBuilder.Entity<Product>()
-				.Property(e => e.Vote)
-				.HasPrecision(5, 0);
+				.Property(e => e.CreatedBy)
+				.IsUnicode(false);
 
 			modelBuilder.Entity<Product>()
 				.Property(e => e.MetaTitle)
 				.IsUnicode(false);
 
-			modelBuilder.Entity<Product>()
+			modelBuilder.Entity<ProductCategory>()
+				.Property(e => e.MetaTitle)
+				.IsUnicode(false);
+
+			modelBuilder.Entity<ProductCategory>()
 				.Property(e => e.MetaDescriptions)
 				.IsFixedLength();
 
-			modelBuilder.Entity<Product>()
+			modelBuilder.Entity<ProductCategory>()
 				.Property(e => e.CreatedBy)
 				.IsUnicode(false);
 
-			modelBuilder.Entity<Product>()
-				.Property(e => e.ModifiedBy)
+			modelBuilder.Entity<Slide>()
+				.Property(e => e.CreatedBy)
 				.IsUnicode(false);
 
 			modelBuilder.Entity<Tag>()
@@ -116,26 +92,6 @@ namespace LuxubuShop.Core.EF
 
 			modelBuilder.Entity<User>()
 				.Property(e => e.CreatedBy)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<User>()
-				.Property(e => e.ModifiedBy)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<ProductCategory>()
-				.Property(e => e.MetaTitle)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<ProductCategory>()
-				.Property(e => e.MetaDescriptions)
-				.IsFixedLength();
-
-			modelBuilder.Entity<ProductCategory>()
-				.Property(e => e.CreatedBy)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<ProductCategory>()
-				.Property(e => e.ModifiedBy)
 				.IsUnicode(false);
 		}
 	}

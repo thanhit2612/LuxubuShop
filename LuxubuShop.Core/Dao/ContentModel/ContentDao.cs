@@ -29,13 +29,10 @@ namespace LuxubuShop.Core.Dao
 		// Insert Method
 		public long Insert(Content entity)
 		{
+			entity.CreatedDate = DateTime.Now;
 			db.Contents.Add(entity);
 			db.SaveChanges();
 			return entity.ID;
-		}
-		public Content GetContentByID(long id)
-		{
-			return db.Contents.Find(id);
 		}
 		// Update Method
 		public bool Update(Content entity)
@@ -44,7 +41,7 @@ namespace LuxubuShop.Core.Dao
 			{
 				var content = db.Contents.Find(entity.ID);
 				content.Name = entity.Name;
-				content.Description = entity.Description;
+				content.MetaDescriptions = entity.MetaDescriptions;
 				content.Detail = entity.Detail;
 				content.ProductLink = entity.ProductLink;
 				content.ProductID = entity.ProductID;
@@ -59,6 +56,10 @@ namespace LuxubuShop.Core.Dao
 			}
 		}
 		public Content ViewDetail(int id)
+		{
+			return db.Contents.Find(id);
+		}
+		public Content GetContentByID(long id)
 		{
 			return db.Contents.Find(id);
 		}

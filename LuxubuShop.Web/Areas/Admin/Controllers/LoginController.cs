@@ -26,7 +26,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
                     userSession.UserName = user.UserName;
                     userSession.UserID = user.ID;
                     TempData["Name"] = user.Name;
-                    TempData["UserName"] = user.UserName;
+
                     Session.Add(CommonConstants.USER_SESSION, userSession);
                     return RedirectToAction("Index", "Home");
                 }
