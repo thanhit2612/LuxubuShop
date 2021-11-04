@@ -44,7 +44,7 @@
 	<div class="section group">
 		@foreach (var item in listNewProduct)
 		{
-			var url = item.Link;
+			var url = item.ProductLink;
 			<div class="grid_1_of_4 images_1_of_4">
 				<a href="@url"><img src="@item.Image" alt="@item.Name" /></a>
 				<h2>@item.Name</h2>
@@ -72,7 +72,7 @@
 	<div class="section group">
 		@foreach (var item in listFeatureProduct)
 		{
-			var url = item.Link;
+			var url = item.ProductLink;
 			<div class="grid_1_of_4 images_1_of_4">
 				<a href="@url"><img src="@item.Image" alt="@item.Name" /></a>
 				<h2>@item.Name</h2>

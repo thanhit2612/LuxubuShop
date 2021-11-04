@@ -1,0 +1,55 @@
+﻿@model LuxubuShop.Core.EF.Menu
+
+@{
+	ViewBag.Title = "Create";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section pageTitle{ Cập nhật Menu }
+
+<div class="btn btn-primary btn-sm">
+	<i class="fas fa-sign-out-alt fa-icon"></i>
+	@Html.ActionLink("Quay lại", "Index", "Menu", new { @class = "text-white" })
+</div>
+<div class="pt-4">
+	<div class="col-lg-12">
+		@using (Html.BeginForm("Edit", "Menu", FormMethod.Post, new { @id = "register-form" }))
+		{
+			@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+			<div class="form-group">
+				@Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-12" })
+				<div class="col-md-12">
+					@Html.TextBoxFor(model => model.Text, new { @class = "form-control form-control-sm", @rules = "required" })
+					<small class="form-message text-danger"></small>
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.TypeID, htmlAttributes: new { @class = "control-label col-md-12" })
+				<div class="col-md-12">
+					@Html.DropDownListFor(model => model.TypeID, null, new { @class = "form-control form-control-sm", @rules = "required|min:6" })
+					<small class="form-message text-danger"></small>
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-12" })
+				<div class="col-md-12">
+					<div class="checkbox">
+						@Html.CheckBoxFor(model => model.Status)
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-primary btn-user btn-block btn-sm">Tạo mới</button>
+				</div>
+			</div>
+		</div>
+	}
+	</div>
+	</div>
+

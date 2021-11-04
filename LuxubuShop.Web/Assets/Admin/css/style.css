@@ -22,3 +22,13 @@
 	height: 60px;
 	object-fit: cover;
 }
+.form-control-sm {
+	border-radius: 0;
+}
+.table thead th {
+	border-bottom: 1px solid #e3e6f0;
+}
+	.table td {
+	vertical-align: middle;
+	border-top: none;
+}

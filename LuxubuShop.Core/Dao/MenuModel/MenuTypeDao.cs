@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace LuxubuShop.Core.Dao
 {
-	public class MenuDao
+	public class MenuTypeDao
 	{
 		LuxubuShopDbContext db = null;
-		public MenuDao()
+		public MenuTypeDao()
 		{
 			db = new LuxubuShopDbContext();
 		}
-		public List<Menu> ListByGroupId(int groupId)
+		public List<MenuType> ListAll()
 		{
-			return db.Menus.Where(x => x.TypeID == groupId && x.Status == true).OrderBy(x => x.DisplayOrder).ToList();
+			return db.MenuTypes.Where(x => x.Status == true).ToList();
 		}
 	}
 }

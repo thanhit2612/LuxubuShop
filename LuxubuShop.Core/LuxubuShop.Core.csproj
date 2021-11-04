@@ -56,13 +56,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dao\ContentDao.cs" />
-    <Compile Include="Dao\MenuDao.cs" />
-    <Compile Include="Dao\ProductCategoryDao.cs" />
-    <Compile Include="Dao\ProductDao.cs" />
-    <Compile Include="Dao\UserDao.cs" />
+    <Compile Include="Dao\ContentModel\ContentDao.cs" />
+    <Compile Include="Dao\MenuModel\MenuDao.cs" />
+    <Compile Include="Dao\MenuModel\MenuTypeDao.cs" />
+    <Compile Include="Dao\ProductModel\ProductCategoryDao.cs" />
+    <Compile Include="Dao\ProductModel\ProductDao.cs" />
+    <Compile Include="Dao\UserModel\UserDao.cs" />
     <Compile Include="EF\About.cs" />
-    <Compile Include="EF\Category.cs" />
     <Compile Include="EF\Content.cs" />
     <Compile Include="EF\ContentTag.cs" />
     <Compile Include="EF\Feedback.cs" />
@@ -71,6 +71,7 @@
     <Compile Include="EF\MenuType.cs" />
     <Compile Include="EF\Product.cs" />
     <Compile Include="EF\ProductCategory.cs" />
+    <Compile Include="EF\Slide.cs" />
     <Compile Include="EF\Tag.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
