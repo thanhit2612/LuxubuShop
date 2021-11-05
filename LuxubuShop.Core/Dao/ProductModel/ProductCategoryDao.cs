@@ -32,6 +32,7 @@ namespace LuxubuShop.Core.Dao
 		// Insert Method
 		public long Insert(ProductCategory entity)
 		{
+			entity.CreatedDate = DateTime.Now;
 			db.ProductCategories.Add(entity);
 			db.SaveChanges();
 			return entity.ID;

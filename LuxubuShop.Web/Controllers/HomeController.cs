@@ -12,6 +12,7 @@ namespace LuxubuShop.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ViewBag.Slides = new SlideDao().ListAll();
             var productDao = new ProductDao();
             ViewBag.NewProducts = productDao.ListNewProduct(4);
             ViewBag.FeatureProducts = productDao.ListNewFeature(4);

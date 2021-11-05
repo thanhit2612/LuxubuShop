@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList.Mvc;
 using LuxubuShop.Core.EF;
+using LuxubuShop.Web.Common;
 
 namespace LuxubuShop.Web.Areas.Admin.Controllers
 {
@@ -18,7 +19,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
             ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
         }
         // GET: Admin/Product
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
             var dao = new ProductDao();
             var model = dao.ListAllPaging(searchString, page, pageSize);
@@ -41,15 +42,14 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new ProductDao();
-                TempData.Keep("UserName");
-                var userName = TempData["UserName"];
-                product.CreatedBy = (string)userName;
-                product.CreatedDate = DateTime.Now;
+                var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+                product.CreatedBy = session.UserName;
+
                 long id = dao.Insert(product);
                 if (id > 0)
                 {
                     SetAlert("Thêm mới sản phẩm thành công !", "success");
-                    return RedirectToAction("Create", "Content");
+                    return RedirectToAction("Create", "Product");
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
                 if (result)
                 {
                     SetAlert("Cập nhật sản phẩm thành công !", "success");
-                    return RedirectToAction("Index", "Content");
+                    return RedirectToAction("Index", "Product");
                 }
                 else
                 {

@@ -19,14 +19,11 @@ namespace LuxubuShop.Core.EF
         [StringLength(250)]
         public string Link { get; set; }
 
-        [StringLength(50)]
-        public string Description { get; set; }
-
         public DateTime? CreatedDate { get; set; }
 
         [StringLength(50)]
         public string CreatedBy { get; set; }
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
     }
 }

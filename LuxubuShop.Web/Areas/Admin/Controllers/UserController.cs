@@ -36,7 +36,6 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 				var dao = new UserDao();
 				var encryptedMd5Pas = Encryptor.MD5Hash(user.Password);
 				user.Password = encryptedMd5Pas;
-				user.CreatedDate = DateTime.Now;
 				long id = dao.Insert(user);
 
 				if (id > 0)
