@@ -3,6 +3,7 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	var listNewProduct = (List<LuxubuShop.Core.EF.Product>)ViewBag.NewProducts;
 	var listFeatureProduct = (List<LuxubuShop.Core.EF.Product>)ViewBag.featureProducts;
+	var listSlide = (List<LuxubuShop.Core.EF.Slide>)ViewBag.Slides;
 }
 
 @section header_slider {
@@ -14,16 +15,14 @@
 			<div class="slider">
 				<div id="slider">
 					<div class="owl-carousel owl-theme" id="banner-slider">
+						@foreach (var item in listSlide)
+						{
 						<div class="item">
-							<a href="">
-								<img src="~/Assets/Client/images/banner1.jpg" alt="" class="slider-img">
+							<a href="@(item.Link)">
+								<img src="@(item.Image)" alt="" class="slider-img">
 							</a>
 						</div>
-						<div class="item">
-							<a href="">
-								<img src="~/Assets/Client/images/banner2.jpg" alt="" class="slider-img">
-							</a>
-						</div>
+						}
 					</div>
 				</div>
 			</div>

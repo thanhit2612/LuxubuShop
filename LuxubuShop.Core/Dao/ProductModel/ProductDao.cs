@@ -28,7 +28,7 @@ namespace LuxubuShop.Core.Dao
 		// Danh sách sản phẩm nổi bật
 		public List<Product> ListNewFeature(int top)
 		{
-			return db.Products.Where(x => x.TopHot != null && x.TopHot > DateTime.Now).OrderBy(x => x.CreatedDate).Take(top).ToList();
+			return db.Products.Where(x => x.ClickCount != null && x.ClickCount > 10).OrderBy(x => x.ClickCount).Take(top).ToList();
 		}
 
 		// Get Method
@@ -44,6 +44,7 @@ namespace LuxubuShop.Core.Dao
 		// Insert Method
 		public long Insert(Product entity)
 		{
+			entity.CreatedDate = DateTime.Now;
 			db.Products.Add(entity);
 			db.SaveChanges();
 			return entity.ID;
@@ -64,7 +65,6 @@ namespace LuxubuShop.Core.Dao
 				product.Image = entity.Image;
 				product.Price = entity.Price;
 				product.CategoryID = entity.CategoryID;
-				product.Detail = entity.Detail;
 				db.SaveChanges();
 				return true;
 			}

@@ -1,5 +1,6 @@
 ﻿using LuxubuShop.Core.Dao;
 using LuxubuShop.Core.EF;
+using LuxubuShop.Web.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 			ViewBag.ParentID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
 		}
 		// GET: Admin/ProductCategory
-		public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
+		public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
 		{
 			var dao = new ProductCategoryDao();
 			var model = dao.ListAllPaging(searchString, page, pageSize);
@@ -41,9 +42,8 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 			if (ModelState.IsValid)
 			{
 				var dao = new ProductCategoryDao();
-				TempData.Keep("UserName");
-				var userName = TempData["UserName"];
-				proCategory.CreatedBy = (string)userName;
+				var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+				proCategory.CreatedBy = session.UserName;
 				proCategory.CreatedDate = DateTime.Now;
 				long id = dao.Insert(proCategory);
 				if (id > 0)

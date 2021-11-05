@@ -1,8 +1,9 @@
-﻿.form-message ul{
+﻿.form-message ul {
 	list-style: none;
 	padding: 0;
 	text-align: center;
 }
+
 .pagination li {
 	border: 1px solid #F0F0F0;
 	padding: 3px 10px;
@@ -10,25 +11,45 @@
 	margin-right: 3px;
 	border-radius: 3px;
 }
+
 .pagination .active {
 	background: #4E73DF;
 	color: #fff;
 }
+
 .fa-icon {
 	transform: rotateZ(180deg);
 }
+
 .img-thumbnail--sive {
 	width: 60px;
 	height: 60px;
 	object-fit: cover;
 }
+
 .form-control-sm {
 	border-radius: 0;
 }
+
 .table thead th {
 	border-bottom: 1px solid #e3e6f0;
 }
-	.table td {
+
+.table td {
 	vertical-align: middle;
 	border-top: none;
+}
+
+#product-img{
+	width: 70px;
+	height: 50px;
+	object-fit: cover;
+	max-width: 100%;
+}
+#product-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
 }

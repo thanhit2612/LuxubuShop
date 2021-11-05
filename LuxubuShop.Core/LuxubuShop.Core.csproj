@@ -56,11 +56,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\AboutDao.cs" />
     <Compile Include="Dao\ContentModel\ContentDao.cs" />
     <Compile Include="Dao\MenuModel\MenuDao.cs" />
     <Compile Include="Dao\MenuModel\MenuTypeDao.cs" />
     <Compile Include="Dao\ProductModel\ProductCategoryDao.cs" />
     <Compile Include="Dao\ProductModel\ProductDao.cs" />
+    <Compile Include="Dao\SlideDao.cs" />
     <Compile Include="Dao\UserModel\UserDao.cs" />
     <Compile Include="EF\About.cs" />
     <Compile Include="EF\Content.cs" />

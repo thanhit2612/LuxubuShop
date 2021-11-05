@@ -20,7 +20,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Content
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
             var dao = new ContentDao();
             var model = dao.ListAllPaging(searchString, page, pageSize);

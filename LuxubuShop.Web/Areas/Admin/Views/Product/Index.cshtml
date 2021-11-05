@@ -32,12 +32,12 @@
 				</div>
 			}
 			<div class="table-responsive mt-3">
-				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr class="text-center">
 							<th>Ngày tạo</th>
 							<th>Tiêu đề</th>
-							<th>Tác giả</th>
+							<th>Hình ảnh</th>
 							<th>Chuyên mục</th>
 							<th>Thống kê</th>
 							<th>Ngày hết hạn</th>
@@ -48,7 +48,7 @@
 						<tr class="text-center">
 							<th>Ngày tạo</th>
 							<th>Tiêu đề</th>
-							<th>Tác giả</th>
+							<th>Hình ảnh</th>
 							<th>Chuyên mục</th>
 							<th>Thống kê</th>
 							<th>Ngày hết hạn</th>
@@ -60,13 +60,17 @@
 						{
 						<tr id="row_@item.ID" class="text-center">
 							<td>@string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</td>
-							<td>@item.Name</td>
-							<td>@item.CreatedBy</td>
+							<td style="width: 330px;">
+								<p id="product-name">@item.Name</p>
+							</td>
+							<td>
+								<img src="@(item.Image)" alt="@(item.Name)"  id="product-img" class="rounded"/>
+							</td>
 							<td>@item.CategoryID</td>
 							<td>@item.ClickCount</td>
 							<td>@string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</td>
 
-							<td class="d-flex justify-content-md-around flex-md-wrap">
+							<td>
 								<button type="button" class="btn btn-primary btn-sm">
 									@Html.ActionLink("Sửa", "Edit", new { @id = item.ID }, new { @class = "text-white" })
 								</button>
