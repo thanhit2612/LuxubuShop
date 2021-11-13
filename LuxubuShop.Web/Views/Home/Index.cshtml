@@ -8,20 +8,18 @@
 
 @section header_slider {
 	<div class="header_slide">
-		<div class="header_bottom_left">
-			@{ Html.RenderAction("ProductCategory", "Product");}
-		</div>
+		@{ Html.RenderAction("ProductCategory", "Product");}
 		<div class="header_bottom_right">
 			<div class="slider">
 				<div id="slider">
 					<div class="owl-carousel owl-theme" id="banner-slider">
 						@foreach (var item in listSlide)
 						{
-						<div class="item">
-							<a href="@(item.Link)">
-								<img src="@(item.Image)" alt="" class="slider-img">
-							</a>
-						</div>
+							<div class="item">
+								<a href="@(item.Link)">
+									<img src="@(item.Image)" alt="" class="slider-img">
+								</a>
+							</div>
 						}
 					</div>
 				</div>
@@ -43,7 +41,7 @@
 	<div class="section group">
 		@foreach (var item in listNewProduct)
 		{
-			var url = item.ProductLink;
+			var url = "/danh-gia/" + item.MetaTitle + "-" + item.ID;
 			<div class="grid_1_of_4 images_1_of_4">
 				<a href="@url"><img src="@item.Image" alt="@item.Name" /></a>
 				<h2>@item.Name</h2>
@@ -52,7 +50,7 @@
 						<p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ")</span></p>
 					</div>
 					<div class="add-cart">
-						<h4><a href="@url">Xem sản phẩm</a></h4>
+						<h4><a href="@url">Xem đánh giá</a></h4>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -64,14 +62,14 @@
 			<h3>Sản phẩm nổi bật</h3>
 		</div>
 		<div class="see">
-			<p><a href="#">Xem tất cả</a></p>
+			<p><a href="/san-pham">Xem tất cả</a></p>
 		</div>
 		<div class="clear"></div>
 	</div>
 	<div class="section group">
 		@foreach (var item in listFeatureProduct)
 		{
-			var url = item.ProductLink;
+			var url = "/danh-gia/" + item.MetaTitle + "-" + item.ID;
 			<div class="grid_1_of_4 images_1_of_4">
 				<a href="@url"><img src="@item.Image" alt="@item.Name" /></a>
 				<h2>@item.Name</h2>
@@ -80,7 +78,7 @@
 						<p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ")</span></p>
 					</div>
 					<div class="add-cart">
-						<h4><a href="@url">Xem sản phẩm</a></h4>
+						<h4><a href="@url">Xem đánh giá</a></h4>
 					</div>
 					<div class="clear"></div>
 				</div>

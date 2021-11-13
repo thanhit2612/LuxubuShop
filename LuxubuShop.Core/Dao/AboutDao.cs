@@ -20,6 +20,7 @@ namespace LuxubuShop.Core.Dao
 		{
 			return db.Abouts.Find(id);
 		}
+
 		// Update Method
 		public bool Update(About entity)
 		{

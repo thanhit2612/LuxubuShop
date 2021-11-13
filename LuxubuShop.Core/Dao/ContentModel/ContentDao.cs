@@ -15,6 +15,16 @@ namespace LuxubuShop.Core.Dao
 		{
 			db = new LuxubuShopDbContext();
 		}
+		// Danh sách bài viết
+		public List<Content> ListAll()
+		{
+			return db.Contents.Where(x => x.Status == true).ToList();
+		}
+		// Danh sach san pham theo danh muc
+		public List<Content> ListByProductId(long productId)
+		{
+			return db.Contents.Where(x => x.ProductID == productId).ToList();
+		}
 		// Get Method
 		public IEnumerable<Content> ListAllPaging(string searchString, int page, int pageSize)
 		{
@@ -25,7 +35,7 @@ namespace LuxubuShop.Core.Dao
 			}
 			return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
 		}
-		
+
 		// Insert Method
 		public long Insert(Content entity)
 		{
@@ -41,7 +51,7 @@ namespace LuxubuShop.Core.Dao
 			{
 				var content = db.Contents.Find(entity.ID);
 				content.Name = entity.Name;
-				content.MetaDescriptions = entity.MetaDescriptions;
+				content.Descriptions = entity.Descriptions;
 				content.Detail = entity.Detail;
 				content.ProductLink = entity.ProductLink;
 				content.ProductID = entity.ProductID;
@@ -55,7 +65,7 @@ namespace LuxubuShop.Core.Dao
 				return false;
 			}
 		}
-		public Content ViewDetail(int id)
+		public Content ViewDetail(long id)
 		{
 			return db.Contents.Find(id);
 		}

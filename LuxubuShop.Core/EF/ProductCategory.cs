@@ -16,6 +16,9 @@ namespace LuxubuShop.Core.EF
         [StringLength(250)]
         public string Name { get; set; }
 
+        [StringLength(500)]
+        public string Descriptions { get; set; }
+
         [StringLength(250)]
         public string SeoTitle { get; set; }
 
@@ -25,7 +28,7 @@ namespace LuxubuShop.Core.EF
         [StringLength(250)]
         public string MetaKeywords { get; set; }
 
-        [StringLength(250)]
+        [StringLength(500)]
         public string MetaDescriptions { get; set; }
 
         public int? DisplayOrder { get; set; }

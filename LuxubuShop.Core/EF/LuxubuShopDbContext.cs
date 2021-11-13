@@ -67,10 +67,6 @@ namespace LuxubuShop.Core.EF
 				.IsUnicode(false);
 
 			modelBuilder.Entity<ProductCategory>()
-				.Property(e => e.MetaDescriptions)
-				.IsFixedLength();
-
-			modelBuilder.Entity<ProductCategory>()
 				.Property(e => e.CreatedBy)
 				.IsUnicode(false);
 
