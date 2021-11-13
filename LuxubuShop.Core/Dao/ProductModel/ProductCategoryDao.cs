@@ -61,7 +61,7 @@ namespace LuxubuShop.Core.Dao
 				return false;
 			}
 		}
-		public ProductCategory ViewDetail(int id)
+		public ProductCategory ViewDetail(long id)
 		{
 			return db.ProductCategories.Find(id);
 		}

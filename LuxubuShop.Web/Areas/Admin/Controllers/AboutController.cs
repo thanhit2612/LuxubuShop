@@ -18,14 +18,14 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/About/Details/5
-        public ActionResult Details(long id = 1)
+        public ActionResult Details(long id =1)
         {
             var about = new AboutDao().ViewDetail(id);
             return View(about);
         }
 
         // GET: Admin/About/Edit/5
-        public ActionResult Edit(long id = 1)
+        public ActionResult Edit(long id=1)
         {
             var about = new AboutDao().ViewDetail(id);
             return View(about);

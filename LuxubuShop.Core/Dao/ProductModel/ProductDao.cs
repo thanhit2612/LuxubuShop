@@ -20,17 +20,21 @@ namespace LuxubuShop.Core.Dao
 		{
 			return db.Products.Where(x => x.Status == true).ToList();
 		}
+		// Danh sach san pham theo danh muc
+		public List<Product> ListByCategoryId(long categoryId)
+		{
+			return db.Products.Where(x => x.CategoryID == categoryId).ToList();
+		}
 		// Danh sách sản phẩm mới nhât
 		public List<Product> ListNewProduct(int top)
 		{
 			return db.Products.OrderBy(x => x.CreatedDate).Take(top).ToList();
 		}
 		// Danh sách sản phẩm nổi bật
-		public List<Product> ListNewFeature(int top)
+		public List<Product> ListFeature(int top)
 		{
-			return db.Products.Where(x => x.ClickCount != null && x.ClickCount > 10).OrderBy(x => x.ClickCount).Take(top).ToList();
+			return db.Products.Where(x => x.Status == true && x.TopHot == true).OrderBy(x => x.TopHot).Take(top).ToList();
 		}
-
 		// Get Method
 		public IEnumerable<Product> ListAllPaging(string searchString, int page, int pageSize)
 		{
@@ -73,7 +77,7 @@ namespace LuxubuShop.Core.Dao
 				return false;
 			}
 		}
-		public Product ViewDetail(int id)
+		public Product ViewDetail(long id)
 		{
 			return db.Products.Find(id);
 		}

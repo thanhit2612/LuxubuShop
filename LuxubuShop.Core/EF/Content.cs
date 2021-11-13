@@ -16,6 +16,9 @@ namespace LuxubuShop.Core.EF
         [StringLength(250)]
         public string Name { get; set; }
 
+        [StringLength(500)]
+        public string Descriptions { get; set; }
+
         [Column(TypeName = "ntext")]
         public string Detail { get; set; }
 
@@ -44,6 +47,6 @@ namespace LuxubuShop.Core.EF
 
         public bool Status { get; set; }
 
-        public DateTime? TopHot { get; set; }
+        public bool TopHot { get; set; }
     }
 }
