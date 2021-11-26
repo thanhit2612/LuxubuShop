@@ -13,29 +13,39 @@ namespace LuxubuShop.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Danh sách sản phẩm theo danh mục
             routes.MapRoute(
                 name: "Product Category",
                 url: "san-pham/{metaTitle}-{id}",
                 defaults: new { controller = "Product", action = "Category", id = UrlParameter.Optional },
                 namespaces: new[] { "LuxubuShop.Web.Controllers" }
             );
+            // Danh sách tất cả sản phẩm
             routes.MapRoute(
                 name: "Product",
                 url: "san-pham",
                 defaults: new { controller = "Product", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "LuxubuShop.Web.Controllers" }
             );
-
+            // Danh sách bài viết theo từng sản phẩm
             routes.MapRoute(
                 name: "Product Content",
                 url: "danh-gia/{metaTitle}-{id}",
                 defaults: new { controller = "Content", action = "ProductContent", id = UrlParameter.Optional },
                 namespaces: new[] { "LuxubuShop.Web.Controllers" }
             );
+            // Danh sách tất cả bài viết 
             routes.MapRoute(
               name: "Content",
               url: "danh-gia",
               defaults: new { controller = "Content", action = "Index", id = UrlParameter.Optional },
+              namespaces: new[] { "LuxubuShop.Web.Controllers" }
+            );
+            // Chi tiết bài viết
+            routes.MapRoute(
+              name: "Content Details",
+              url: "danh-gia/chi-tiet/{metaTitle}-{id}",
+              defaults: new { controller = "Content", action = "Details", id = UrlParameter.Optional },
               namespaces: new[] { "LuxubuShop.Web.Controllers" }
             );
 

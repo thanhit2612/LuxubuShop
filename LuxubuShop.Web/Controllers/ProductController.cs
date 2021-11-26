@@ -24,7 +24,7 @@ namespace LuxubuShop.Web.Controllers
             return PartialView(model);
         }
         // Lấy ra sản phẩm cho từng danh mục
-        public ActionResult Category(long id, int page = 1, int pageSize = 1)
+        public ActionResult Category(long id, int page = 1, int pageSize = 12)
 		{
             var category = new ProductCategoryDao().ViewDetail(id);
             ViewBag.Category = category;
