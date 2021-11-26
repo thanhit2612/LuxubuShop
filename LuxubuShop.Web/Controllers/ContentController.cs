@@ -17,13 +17,19 @@ namespace LuxubuShop.Web.Controllers
             return View(model);
         }
         // Danh sách bài viết theo sản phẩm
-        public ActionResult ProductContent(long id, int page = 1, int pageSize = 1)
+        public ActionResult ProductContent(long id, int page = 1, int pageSize = 10)
         {
             var product = new ProductDao().ViewDetail(id);
             ViewBag.Product = product;
 
             var model = new ContentDao().ListByProductId(id).OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
             return View(model);
+        }
+        // Chi tiết bài viết
+        public ActionResult Details(long id)
+        {
+            var content = new ContentDao().ViewDetail(id);
+            return View(content);
         }
     }
 }

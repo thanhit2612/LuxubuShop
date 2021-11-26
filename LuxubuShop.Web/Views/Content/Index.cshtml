@@ -9,22 +9,27 @@
 <div class="content">
 	@foreach (var item in Model)
 	{
+		var link = "danh-gia/chi-tiet/" + item.MetaTitle + "-" + item.ID;
 		<div class="image group">
 			<div class="grid images_3_of_1">
-				<img src="@item.Image" alt="@item.Name" style="border-radius: 5px"/>
+				<img src="@item.Image" alt="@item.Name" style="border-radius: 5px" />
 			</div>
 			<div class="grid news_desc">
-				<h3>@item.Name</h3>
+				<h3>
+					<a href="@link">
+						@item.Name
+					</a>
+				</h3>
 				<p>@item.Descriptions ...</p>
 				<p>
-					<a href="#">View More</a>
+					<a href="@link">View More</a>
 				</p>
 				<p>
-					<i class="fas fa-tags"></i>Tags: 
+					<i class="fas fa-tags"></i>Tags:
 					<a href="#">@item.Tags</a>
 				</p>
 				<p>
-					<i class="fas fa-user-edit"></i>Tác giả: 
+					<i class="fas fa-user-edit"></i>Tác giả:
 					@item.CreatedBy | @string.Format("{0:dd-MM-yyyy}", item.CreatedDate)
 				</p>
 			</div>
