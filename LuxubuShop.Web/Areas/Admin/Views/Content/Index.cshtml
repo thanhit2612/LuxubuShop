@@ -55,26 +55,28 @@
 					<tbody>
 						@foreach (var item in Model)
 						{
-							<tr id="row_@item.ID" class="text-center">
-								<td>@item.Name</td>
-								<td>@item.CreatedBy</td>
-								<td>@item.ProductID</td>
-								<td>@item.Tags</td>
-								<td>@string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</td>
-								<td>
-									<button type="button" class="btn btn-primary btn-sm">
-										@Html.ActionLink("Sửa", "Edit", new { @id = item.ID }, new { @class = "text-white" })
-									</button>
-									<button type="button" class="btn btn-danger btn-sm">
-										@Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
-										   {
-											   Confirm = "Bạn chắn chắn muốn xóa tài khoản này ?",
-											   OnComplete = "$('#row_" + @item.ID + "').remove()",
-											   HttpMethod = "Delete"
-										   }, new { @class = "text-white" })
-									</button>
-								</td>
-							</tr>
+						<tr id="row_@item.ID" class="text-center">
+							<td style="max-width: 200px;">
+								<p id="product-name">@item.Name</p>
+							</td>
+							<td>@item.CreatedBy</td>
+							<td>@item.ProductID</td>
+							<td>@item.Tags</td>
+							<td>@string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</td>
+							<td>
+								<button type="button" class="btn btn-primary btn-sm">
+									@Html.ActionLink("Sửa", "Edit", new { @id = item.ID }, new { @class = "text-white" })
+								</button>
+								<button type="button" class="btn btn-danger btn-sm">
+									@Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+									   {
+										   Confirm = "Bạn chắn chắn muốn xóa tài khoản này ?",
+										   OnComplete = "$('#row_" + @item.ID + "').remove()",
+										   HttpMethod = "Delete"
+									   }, new { @class = "text-white" })
+								</button>
+							</td>
+						</tr>
 						}
 					</tbody>
 				</table>

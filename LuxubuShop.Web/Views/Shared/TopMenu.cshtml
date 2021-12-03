@@ -1,12 +1,30 @@
 ﻿@model List<LuxubuShop.Core.EF.Menu>
+
+@{ 
+	var session = (LuxubuShop.Web.Common.UserLogin) Session[LuxubuShop.Web.Common.CommonConstants.USER_SESSION];
+}
+
 <div class="account_desc">
 	<ul>
 		@foreach (var item in Model)
 		{
-			<li>
-				<a href="@item.Link" target="@item.Target">@item.Text</a>
-			</li>
+			if (session == null)
+			{
+				<li>
+					<a href="@item.Link" target="@item.Target">@item.Text</a>
+				</li>
+			}
+			else
+			{
+				<li>
+					Hello: @session.Name
+				</li>
+				<li>
+					@Html.ActionLink("Logout", "Logout", "Login")
+				</li>
+			}
 		}
 		<div class="clear"></div>
 	</ul>
+
 </div>

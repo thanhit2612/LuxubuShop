@@ -9,7 +9,6 @@ namespace LuxubuShop.Core.Dao
 {
 	public class AboutDao
 	{
-/*		public static string USER_SESSION = "USER_SESSION";*/
 		LuxubuShopDbContext db = null;
 		public AboutDao()
 		{
@@ -31,7 +30,6 @@ namespace LuxubuShop.Core.Dao
 				about.Description = entity.Description;
 				about.Detail = entity.Detail;
 				about.Image = entity.Image;
-				about.CreatedDate = entity.CreatedDate;
 				db.SaveChanges();
 				return true;
 			}

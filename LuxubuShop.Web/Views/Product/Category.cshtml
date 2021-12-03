@@ -3,7 +3,6 @@
 @model PagedList<LuxubuShop.Core.EF.Product>
 @{
 	var category = (LuxubuShop.Core.EF.ProductCategory)ViewBag.Category;
-	ViewBag.Title = category.Name;
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

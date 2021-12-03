@@ -43,12 +43,13 @@ namespace LuxubuShop.Core.Dao
 			{
 				model = model.Where(x => x.Name.Contains(searchString));
 			}
-			return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+			return model.OrderByDescending(x => x.ClickCount).ToPagedList(page, pageSize);
 		}
 		// Insert Method
 		public long Insert(Product entity)
 		{
 			entity.CreatedDate = DateTime.Now;
+			entity.ExpirationDate = DateTime.Now.AddDays(30);
 			db.Products.Add(entity);
 			db.SaveChanges();
 			return entity.ID;

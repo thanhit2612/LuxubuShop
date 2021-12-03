@@ -40,13 +40,13 @@
 	border-top: none;
 }
 
-#product-img{
-	width: 70px;
-	height: 50px;
+#product-img {
+	height: 55px;
 	object-fit: cover;
 	max-width: 100%;
 }
 #product-name {
+	margin-bottom: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;

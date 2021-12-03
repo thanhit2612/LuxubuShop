@@ -24,7 +24,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
             var dao = new ProductDao();
             var model = dao.ListAllPaging(searchString, page, pageSize);
             ViewBag.SearchString = searchString;
-            SetViewBag();
+
             return View(model);
         }
         // GET: Admin/Content/Create

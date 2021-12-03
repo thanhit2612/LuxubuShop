@@ -55,6 +55,10 @@ namespace LuxubuShop.Core.EF
 				.HasPrecision(18, 0);
 
 			modelBuilder.Entity<Product>()
+				.Property(e => e.PromotionPrice)
+				.HasPrecision(18, 0);
+
+			modelBuilder.Entity<Product>()
 				.Property(e => e.CreatedBy)
 				.IsUnicode(false);
 

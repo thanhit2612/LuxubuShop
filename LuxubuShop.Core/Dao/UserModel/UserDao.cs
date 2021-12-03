@@ -47,11 +47,26 @@ namespace LuxubuShop.Core.Dao
 		// Insert Method
 		public long Insert(User entity)
 		{
-				entity.CreatedDate = DateTime.Now;
+			entity.CreatedDate = DateTime.Now;
 
+			db.Users.Add(entity);
+			db.SaveChanges();
+			return entity.ID;
+		}
+		// Client User Insert Method 
+		public long InsertForFacebook(User entity)
+		{
+			var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
+			if (user == null)
+			{
 				db.Users.Add(entity);
 				db.SaveChanges();
 				return entity.ID;
+			}
+			else
+			{
+			return user.ID;
+			}
 		}
 		// Update Method
 		public bool Update(User entity)

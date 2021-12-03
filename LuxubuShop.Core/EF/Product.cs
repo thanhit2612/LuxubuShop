@@ -24,6 +24,8 @@ namespace LuxubuShop.Core.EF
 
         public decimal? Price { get; set; }
 
+        public decimal? PromotionPrice { get; set; }
+
         [StringLength(250)]
         public string ProductLink { get; set; }
 

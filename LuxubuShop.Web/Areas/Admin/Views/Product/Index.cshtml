@@ -4,6 +4,8 @@
 @{
 	ViewBag.Title = "Index";
 	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+	var category = (LuxubuShop.Core.EF.ProductCategory)ViewBag.Category;
 }
 @section pageTitle{ Sản phẩm }
 
@@ -40,6 +42,7 @@
 							<th>Hình ảnh</th>
 							<th>Chuyên mục</th>
 							<th>Thống kê</th>
+							<th>Hot</th>
 							<th>Ngày hết hạn</th>
 							<th>Tùy chỉnh</th>
 						</tr>
@@ -51,6 +54,7 @@
 							<th>Hình ảnh</th>
 							<th>Chuyên mục</th>
 							<th>Thống kê</th>
+							<th>Hot</th>
 							<th>Ngày hết hạn</th>
 							<th>Tùy chỉnh</th>
 						</tr>
@@ -60,15 +64,16 @@
 						{
 						<tr id="row_@item.ID" class="text-center">
 							<td>@string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</td>
-							<td style="width: 330px;">
+							<td style="max-width: 200px;">
 								<p id="product-name">@item.Name</p>
 							</td>
 							<td>
-								<img src="@(item.Image)" alt="@(item.Name)"  id="product-img" class="rounded"/>
+								<img src="@(item.Image)" alt="@(item.Name)" id="product-img" class="img-thumbnail" />
 							</td>
-							<td>@item.CategoryID</td>
+							<td>@category.Name</td>
 							<td>@item.ClickCount</td>
-							<td>@string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</td>
+							<td>@item.TopHot</td>
+							<td>@string.Format("{0:dd/MM/yyyy}", item.ExpirationDate)</td>
 
 							<td>
 								<button type="button" class="btn btn-primary btn-sm">
