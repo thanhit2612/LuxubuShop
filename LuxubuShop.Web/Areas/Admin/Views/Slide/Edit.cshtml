@@ -29,30 +29,38 @@
 		{
 			@Html.AntiForgeryToken()
 
-			<div class="form-horizontal">
-				<div class="form-group">
-					@Html.LabelFor(model => model.Image, new { @class = "control-label col-md-12" })
-					<div class="col-md-12 d-flex">
-						@Html.TextBoxFor(model => model.Image, new { @class = "form-control form-control-sm col-md-5", @id = "urlImage" })
-						<button href="#" id="btnSelectImage" class="btn btn-warning btn-sm ml-2">Chọn ảnh</button>
-					</div>
+		<div class="form-horizontal">
+			<div class="form-group">
+				@Html.LabelFor(model => model.Image, new { @class = "control-label col-md-12" })
+				<div class="col-md-12 d-flex">
+					@Html.TextBoxFor(model => model.Image, new { @class = "form-control form-control-sm col-md-5", @id = "urlImage" })
+					<button href="#" id="btnSelectImage" class="btn btn-warning btn-sm ml-2">Chọn ảnh</button>
 				</div>
+			</div>
 
-				<div class="form-group">
-					@Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-12" })
-					<div class="col-md-12">
-						<div class="checkbox">
-							@Html.CheckBoxFor(model => model.Status)
-						</div>
-					</div>
+			<div class="form-group">
+				@Html.LabelFor(model => model.Link, new { @class = "control-label col-md-12" })
+				<div class="col-md-12 d-flex">
+					@Html.TextBoxFor(model => model.Link, new { @class = "form-control form-control-sm col-md-5", @id = "urlImage" })
+					<button href="#" id="btnSelectImage" class="btn btn-warning btn-sm ml-2">Chọn ảnh</button>
 				</div>
+			</div>
 
-				<div class="form-group">
-					<div class="col-md-12">
-						<button type="submit" class="btn btn-primary btn-user btn-block btn-sm">Lưu</button>
+			<div class="form-group">
+				@Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-12" })
+				<div class="col-md-12">
+					<div class="checkbox">
+						@Html.CheckBoxFor(model => model.Status)
 					</div>
 				</div>
 			</div>
+
+			<div class="form-group">
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-primary btn-user btn-block btn-sm">Lưu</button>
+				</div>
+			</div>
+		</div>
 		}
 	</div>
 </div>

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace LuxubuShop.Web.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         // GET: Home

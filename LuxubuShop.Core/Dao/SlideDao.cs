@@ -42,6 +42,7 @@ namespace LuxubuShop.Core.Dao
 				var slide = db.Slides.Find(entity.ID);
 				slide.Image = entity.Image;
 				slide.Status = entity.Status;
+				slide.Link = entity.Link;
 
 				db.SaveChanges();
 				return true;
