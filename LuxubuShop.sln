@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxubuShop.Core", "LuxubuSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxubuShop.Web", "LuxubuShop.Web\LuxubuShop.Web.csproj", "{8AF6B53F-8AF7-4543-8454-C05849AAB2D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3F2E62F0-B56D-4B2E-9B09-B841D5881BEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{8AF6B53F-8AF7-4543-8454-C05849AAB2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AF6B53F-8AF7-4543-8454-C05849AAB2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AF6B53F-8AF7-4543-8454-C05849AAB2D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F2E62F0-B56D-4B2E-9B09-B841D5881BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F2E62F0-B56D-4B2E-9B09-B841D5881BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F2E62F0-B56D-4B2E-9B09-B841D5881BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F2E62F0-B56D-4B2E-9B09-B841D5881BEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

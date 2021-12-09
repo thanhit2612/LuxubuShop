@@ -62,6 +62,20 @@ namespace LuxubuShop.Web
 			  defaults: new { controller = "Login", action = "LoginFacebook", id = UrlParameter.Optional },
 			  namespaces: new[] { "LuxubuShop.Web.Controllers" }
 			);
+			// Tags
+			routes.MapRoute(
+			  name: "Tags",
+			  url: "tag/{tagId}",
+			  defaults: new { controller = "Content", action = "Tag", id = UrlParameter.Optional },
+			  namespaces: new[] { "LuxubuShop.Web.Controllers" }
+			);
+			// Search
+			routes.MapRoute(
+			  name: "Search",
+			  url: "tim-kiem",
+			  defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
+			  namespaces: new[] { "LuxubuShop.Web.Controllers" }
+			);
 
 			routes.MapRoute(
 				name: "Default",

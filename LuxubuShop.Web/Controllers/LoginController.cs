@@ -56,12 +56,9 @@ namespace LuxubuShop.Web.Controllers
 			if (!string.IsNullOrEmpty(accessToken))
 			{
 				fb.AccessToken = accessToken;
-				dynamic me = fb.Get("me?fields=id,first_name,middle_name,last_name, name, name_format, short_name, picture,email");
+				dynamic me = fb.Get("me?fields=id,name,email");
 				string email = me.email;
 				string userName = me.email;
-				string firstName = me.first_name;
-				string middleName = me.middle_name;
-				string lastName = me.last_name;
 				string name = me.name;
 
 				var user = new User();

@@ -1,0 +1,45 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<LuxubuShop.Core.EF.Content>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	var tag = (LuxubuShop.Core.EF.Tag)ViewBag.Tag;
+}
+<div class="content">
+	@foreach (var item in Model)
+	{
+		var link = "/danh-gia/" + item.MetaTitle + "-" + tag.ID;
+		<div class="image group">
+			<div class="grid images_3_of_1">
+				<img src="@item.Image" alt="@item.Name" style="border-radius: 5px" />
+			</div>
+			<div class="grid news_desc">
+				<h3>
+					<a href="@link">
+						@item.Name
+					</a>
+				</h3>
+				<p>@item.Descriptions ...</p>
+				<p>
+					<a href="@link">View More</a>
+				</p>
+				<p>
+					<i class="fas fa-tags"></i>Tags:
+					<a href="#">@tag.Name</a>
+				</p>
+				<p>
+					<i class="fas fa-user-edit"></i>Tác giả:
+					@item.CreatedBy | @string.Format("{0:dd-MM-yyyy}", item.CreatedDate)
+				</p>
+			</div>
+		</div>
+	}
+	<div class="content-pagenation">
+		<div class="pageList">
+			Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+			@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+		</div>
+	</div>
+</div> 

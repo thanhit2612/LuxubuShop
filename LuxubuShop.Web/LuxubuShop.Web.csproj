@@ -2858,6 +2858,10 @@
     <Content Include="Assets\Client\images\twitter.png" />
     <Content Include="Assets\Client\images\value-rating.png" />
     <Content Include="Assets\Client\images\wishlist.png" />
+    <Content Include="Assets\Client\js\baseController.js" />
+    <Content Include="Assets\Client\css\jquery-ui.css" />
+    <Content Include="Assets\Client\js\jquery-3.6.0.js" />
+    <Content Include="Assets\Client\js\jquery-ui.js" />
     <Content Include="Assets\Client\js\movetop.js" />
     <Content Include="Assets\Client\js\slider\jquery.min.js" />
     <Content Include="Assets\Client\js\slider\owl.carousel.js" />
@@ -3150,6 +3154,8 @@
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Content\ProductContent.cshtml" />
     <Content Include="Views\Content\Details.cshtml" />
+    <Content Include="Views\Content\Tag.cshtml" />
+    <Content Include="Views\Product\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3163,6 +3169,10 @@
     <Folder Include="UploadFiles\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{3f2e62f0-b56d-4b2e-9b09-b841d5881bec}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LuxubuShop.Core\LuxubuShop.Core.csproj">
       <Project>{0256b484-b277-462f-920e-a85054c65614}</Project>
       <Name>LuxubuShop.Core</Name>
