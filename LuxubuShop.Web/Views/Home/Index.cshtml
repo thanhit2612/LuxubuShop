@@ -45,13 +45,29 @@
 			<div class="grid_1_of_4 images_1_of_4">
 				<a href="@link"><img src="@item.Image" alt="@item.Name" /></a>
 				<h2>@item.Name</h2>
+@*				<h3>
+					@for (int i = 0; i < item.ClickCount; i++)
+					{
+						<i class="fa fa-star" aria-hidden="true"></i>
+					}
+					@for (int i = Convert.ToInt32(item.ClickCount); i < 5; i++)
+					{
+						<i class="fa fa-star-half" aria-hidden="true"></i>
+					}
+				</h3>*@
+				<h3>
+					<i class="fa fa-eye" aria-hidden="true"></i>
+					@item.ClickCount
+				</h3>
 				<div class="price-details">
 					<div class="price-number">
+						<p style="text-decoration:line-through; opacity: .8"><span class="rupees">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0"): "Liên hệ") VNĐ</span></p>
 						<p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ") VNĐ</span></p>
 					</div>
 					<div class="add-cart">
-						<h4><a href="@item.ProductLink">Xem sản phẩm</a></h4>
-						<h4><a href="@link">Xem đánh giá</a></h4>
+						<h4><a href="@item.ProductLink" target="_blank">Xem sản phẩm</a></h4>
+						<h4>@Html.ActionLink("Xem đánh giá", "ClickCount", "Product", new { id = item.ID }, null)</h4>
+						@*<h4 style="margin-top: 5px;"><a href="/Product/ClickCount">Xem đánh giá</a></h4>*@
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -74,13 +90,18 @@
 			<div class="grid_1_of_4 images_1_of_4">
 				<a href="@link"><img src="@item.Image" alt="@item.Name" /></a>
 				<h2>@item.Name</h2>
+				<h3>
+					<i class="fa fa-eye" aria-hidden="true"></i>
+					@item.ClickCount
+				</h3>
 				<div class="price-details">
 					<div class="price-number">
+						<p style="text-decoration:line-through; opacity: .8"><span class="rupees">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0"): "Liên hệ") VNĐ</span></p>
 						<p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ") VNĐ</span></p>
 					</div>
 					<div class="add-cart">
 						<h4><a href="@item.ProductLink">Xem sản phẩm</a></h4>
-						<h4><a href="@link">Xem đánh giá</a></h4>
+						<h4 style="margin-top: 5px;"><a href="@link">Xem đánh giá</a></h4>
 					</div>
 					<div class="clear"></div>
 				</div>

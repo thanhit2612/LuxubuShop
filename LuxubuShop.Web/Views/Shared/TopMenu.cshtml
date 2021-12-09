@@ -10,14 +10,14 @@
 		{
 			if (session == null)
 			{
-				<li>
-					<a href="@item.Link" target="@item.Target">@item.Text</a>
-				</li>
+		<li style="background: #0F91F3; padding: 8px 10px; border-radius: 4px">
+			<a href="@item.Link" target="@item.Target" style="color: #fff;">@item.Text</a>
+		</li>
 			}
 			else
 			{
 				<li>
-					Hello: @session.Name
+					Hello: @session.UserName
 				</li>
 				<li>
 					@Html.ActionLink("Logout", "Logout", "Login")

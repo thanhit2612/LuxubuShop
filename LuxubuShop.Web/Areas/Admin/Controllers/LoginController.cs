@@ -41,7 +41,6 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
         // Loout
         public ActionResult Logout()
         {
-            Session[CommonConstants.USER_SESSION] = null;
             return RedirectToAction("Index", "Login");
         }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using LuxubuShop.Core.EF;
 
 namespace LuxubuShop.Web.Controllers
 {
@@ -32,5 +33,30 @@ namespace LuxubuShop.Web.Controllers
             var model = new ProductDao().ListByCategoryId(id).OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
             return View(model);
 		}
+        // Hiển thị danh sách tên sp
+        public JsonResult ListName(string q)
+		{
+            var data = new ProductDao().ListName(q);
+            return Json(new
+            {
+                data = data,
+             status = true,
+            }, JsonRequestBehavior.AllowGet);
+		}
+        // Tìm kiếm sản phẩm
+        public ActionResult Search(string q, int page = 1, int pageSize = 12)
+        {
+            var dao = new ProductDao();
+            var model = dao.Search(q, page, pageSize);
+
+            ViewBag.KeyWord = q;
+            return View(model);
+        }
+        // Click Count
+        public ActionResult ClickCount(long id)
+        {
+            var count = new ProductDao().ClickCount(id);
+            return RedirectToAction("Index","Content", count);
+        }
     }
 }

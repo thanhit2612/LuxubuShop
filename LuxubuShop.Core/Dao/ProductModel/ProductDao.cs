@@ -20,11 +20,27 @@ namespace LuxubuShop.Core.Dao
 		{
 			return db.Products.Where(x => x.Status == true).ToList();
 		}
+		// Danh sách tên sản phẩm
+		public List<string> ListName(string keyword)
+		{
+			return db.Products.Where(x => x.Name.Contains(keyword)).Select(x => x.Name).ToList();
+		}
 		// Danh sach san pham theo danh muc
 		public List<Product> ListByCategoryId(long categoryId)
 		{
 			return db.Products.Where(x => x.CategoryID == categoryId).ToList();
 		}
+		// Danh sách sản phẩm tìm kiếm được.
+		public IEnumerable<Product> Search(string keyword, int page, int pageSize)
+		{
+			IQueryable<Product> model = db.Products;
+			if (!string.IsNullOrEmpty(keyword))
+			{
+				model = model.Where(x => x.Name.Contains(keyword));
+			}
+			return model.OrderByDescending(x => x.Name).ToPagedList(page, pageSize);
+		}
+
 		// Danh sách sản phẩm mới nhât
 		public List<Product> ListNewProduct(int top)
 		{
@@ -45,11 +61,13 @@ namespace LuxubuShop.Core.Dao
 			}
 			return model.OrderByDescending(x => x.ClickCount).ToPagedList(page, pageSize);
 		}
+
 		// Insert Method
 		public long Insert(Product entity)
 		{
 			entity.CreatedDate = DateTime.Now;
 			entity.ExpirationDate = DateTime.Now.AddDays(30);
+			entity.ClickCount = 0;
 			db.Products.Add(entity);
 			db.SaveChanges();
 			return entity.ID;
@@ -98,5 +116,13 @@ namespace LuxubuShop.Core.Dao
 				return false;
 			}
 		}
+		public bool ClickCount(long id)
+		{
+			var product = db.Products.Find(id);
+			product.ClickCount += 1;
+			db.SaveChanges();
+			return true;
+		}
+
 	}
 }
