@@ -74,14 +74,14 @@ namespace LuxubuShop.Web.Controllers
 					var userSession = new UserLogin();
 					userSession.UserName = user.UserName;
 					userSession.UserID = user.ID;
-					Session.Add(CommonConstants.USER_SESSION, userSession);
+					Session.Add(CommonConstants.CUSTOMER_SESSION, userSession);
 				}
 			}
 			return Redirect("/");
 		}
 		public ActionResult Logout()
 		{
-			Session[CommonConstants.USER_SESSION] = null;
+			Session[CommonConstants.CUSTOMER_SESSION] = null;
 			return Redirect("/");
 		}
 	}

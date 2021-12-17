@@ -10,7 +10,6 @@ namespace LuxubuShop.Core.Dao
 {
 	public class UserDao
 	{
-		public static string USER_SESSION = "USER_SESSION";
 		LuxubuShopDbContext db = null;
 		public UserDao()
 		{
@@ -47,11 +46,18 @@ namespace LuxubuShop.Core.Dao
 		// Insert Method
 		public long Insert(User entity)
 		{
-			entity.CreatedDate = DateTime.Now;
-
-			db.Users.Add(entity);
-			db.SaveChanges();
-			return entity.ID;
+			var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
+			if (user == null)
+			{
+				entity.CreatedDate = DateTime.Now;
+				db.Users.Add(entity);
+				db.SaveChanges();
+				return entity.ID;
+			}
+			else
+			{
+				return user.ID;
+			}
 		}
 		// Client User Insert Method 
 		public long InsertForFacebook(User entity)
@@ -65,7 +71,7 @@ namespace LuxubuShop.Core.Dao
 			}
 			else
 			{
-			return user.ID;
+				return user.ID;
 			}
 		}
 		// Update Method

@@ -71,6 +71,10 @@ namespace LuxubuShop.Core.Dao
 			{
 				entity.MetaTitle = StringHelper.ToUnsignString(entity.Name);
 			}
+			if (string.IsNullOrEmpty(entity.MetaDescriptions))
+			{
+				entity.MetaDescriptions = StringHelper.ToUnsignString(entity.Name);
+			}
 			//Xử lý thêm bài viết
 			entity.CreatedDate = DateTime.Now;
 			db.Contents.Add(entity);
@@ -102,13 +106,18 @@ namespace LuxubuShop.Core.Dao
 			try
 			{
 				// Xử lý Alias
-				if (string.IsNullOrEmpty(entity.MetaTitle))
-				{
-					entity.MetaTitle = StringHelper.ToUnsignString(entity.Name);
-				}
 
 				// Xử lý Edit
 				var content = db.Contents.Find(entity.ID);
+				// Xử lý Alias
+				if (string.IsNullOrEmpty(entity.MetaTitle))
+				{
+					content.MetaTitle = StringHelper.ToUnsignString(entity.Name);
+				}
+				if (string.IsNullOrEmpty(entity.MetaDescriptions))
+				{
+					content.MetaDescriptions = StringHelper.ToUnsignString(entity.Descriptions);
+				}
 				content.Name = entity.Name;
 				content.Descriptions = entity.Descriptions;
 				content.Detail = entity.Detail;

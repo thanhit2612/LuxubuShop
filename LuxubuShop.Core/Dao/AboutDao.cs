@@ -1,4 +1,5 @@
-﻿using LuxubuShop.Core.EF;
+﻿using Common;
+using LuxubuShop.Core.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +26,23 @@ namespace LuxubuShop.Core.Dao
 		{
 			try
 			{
+				// Xử lý Edit
 				var about = db.Abouts.Find(entity.ID);
+				// Xử lý Alias
+				if (string.IsNullOrEmpty(entity.MetaTitle))
+				{
+					about.MetaTitle = StringHelper.ToUnsignString(entity.Name);
+				}
+				if (string.IsNullOrEmpty(entity.MetaDescriptions))
+				{
+					about.MetaDescriptions = StringHelper.ToUnsignString(entity.Description);
+				}
 				about.Name = entity.Name;
 				about.Description = entity.Description;
 				about.Detail = entity.Detail;
 				about.Image = entity.Image;
+				about.MetaKeywords = entity.MetaKeywords;
+				about.Status = entity.Status;
 				db.SaveChanges();
 				return true;
 			}

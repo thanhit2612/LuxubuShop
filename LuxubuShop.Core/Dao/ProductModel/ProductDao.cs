@@ -1,4 +1,5 @@
-﻿using LuxubuShop.Core.EF;
+﻿using Common;
+using LuxubuShop.Core.EF;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,16 @@ namespace LuxubuShop.Core.Dao
 		// Insert Method
 		public long Insert(Product entity)
 		{
+			// Xử lý Alias
+			if (string.IsNullOrEmpty(entity.MetaTitle))
+			{
+				entity.MetaTitle = StringHelper.ToUnsignString(entity.Name);
+			}
+			if (string.IsNullOrEmpty(entity.MetaDescriptions))
+			{
+				entity.MetaDescriptions = StringHelper.ToUnsignString(entity.Name);
+			}
+
 			entity.CreatedDate = DateTime.Now;
 			entity.ExpirationDate = DateTime.Now.AddDays(30);
 			entity.ClickCount = 0;
@@ -82,12 +93,24 @@ namespace LuxubuShop.Core.Dao
 			try
 			{
 				var product = db.Products.Find(entity.ID);
+				if (string.IsNullOrEmpty(entity.MetaTitle))
+				{
+					product.MetaTitle = StringHelper.ToUnsignString(entity.Name);
+				}
+				if (string.IsNullOrEmpty(entity.MetaDescriptions))
+				{
+					product.MetaDescriptions = StringHelper.ToUnsignString(entity.Descriptions);
+				}
+				product.CategoryID = entity.CategoryID;
 				product.Name = entity.Name;
-				product.ProductLink = entity.ProductLink;
-				product.MetaDescriptions = entity.MetaDescriptions;
+				product.Descriptions = entity.Descriptions;
 				product.Image = entity.Image;
 				product.Price = entity.Price;
-				product.CategoryID = entity.CategoryID;
+				product.PromotionPrice = entity.PromotionPrice;
+				product.ProductLink = entity.ProductLink;
+				product.MetaKeywords = entity.MetaKeywords;
+				product.Status = entity.Status;
+				product.TopHot = entity.TopHot;
 				db.SaveChanges();
 				return true;
 			}

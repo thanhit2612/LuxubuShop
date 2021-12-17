@@ -50,5 +50,7 @@ namespace LuxubuShop.Core.EF
         public int? ClickCount { get; set; }
 
         public bool TopHot { get; set; }
+
+        public int Rating { get; set; }
     }
 }
