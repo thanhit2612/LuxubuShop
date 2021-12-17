@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PagedList;
+using Common;
+
 namespace LuxubuShop.Core.Dao
 {
 	public class ProductCategoryDao
@@ -32,6 +34,14 @@ namespace LuxubuShop.Core.Dao
 		// Insert Method
 		public long Insert(ProductCategory entity)
 		{
+			if (string.IsNullOrEmpty(entity.MetaTitle))
+			{
+				entity.MetaTitle = StringHelper.ToUnsignString(entity.Name);
+			}
+			if (string.IsNullOrEmpty(entity.MetaDescriptions))
+			{
+				entity.MetaDescriptions = StringHelper.ToUnsignString(entity.Name);
+			}
 			entity.CreatedDate = DateTime.Now;
 			db.ProductCategories.Add(entity);
 			db.SaveChanges();
@@ -47,12 +57,21 @@ namespace LuxubuShop.Core.Dao
 			try
 			{
 				var proCategory = db.ProductCategories.Find(entity.ID);
-				proCategory.Name = entity.Name;
+				if (string.IsNullOrEmpty(entity.MetaTitle))
+				{
+					proCategory.MetaTitle = StringHelper.ToUnsignString(entity.Name);
+				}
+				if (string.IsNullOrEmpty(entity.MetaDescriptions))
+				{
+					proCategory.MetaDescriptions = StringHelper.ToUnsignString(entity.Name);
+				}
 				proCategory.ParentID = entity.ParentID;
-				proCategory.ShowOnHome = entity.ShowOnHome;
+				proCategory.Name = entity.Name;
+				proCategory.Descriptions = entity.Descriptions;
 				proCategory.SeoTitle = entity.SeoTitle;
-				proCategory.MetaDescriptions = entity.MetaDescriptions;
+				proCategory.MetaKeywords = entity.MetaKeywords;
 				proCategory.Status = entity.Status;
+				proCategory.ShowOnHome = entity.ShowOnHome;
 				db.SaveChanges();
 				return true;
 			}
