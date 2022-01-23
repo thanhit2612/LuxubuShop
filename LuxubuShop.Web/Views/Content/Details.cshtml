@@ -1,24 +1,78 @@
-﻿@model LuxubuShop.Core.EF.Content
+﻿@model LuxubuShop.Core.ViewModels.ContentViewModel
 
 @{
 	ViewBag.Title = "Details";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	var tags = (List<LuxubuShop.Core.EF.Tag>)ViewBag.Tags;
+	var listRelatedContent = (List<LuxubuShop.Core.EF.Content>)ViewBag.ListRelatedContent;
 }
 
-<div class="container">
-	<h3 class="h3">@Model.Name</h3>
-	<p>@Model.Descriptions</p>
-	<p>@Html.Raw(@Model.Detail)</p>
 
-	<ul>
 
-		<li>
-			@foreach (var tag in tags)
-			{
-				<a href="/tag/@tag.ID">@tag.Name, </a>
-			}
+<div class="news">
+	<h3 class="title">
+		<span>Bài đánh giá</span>
+		<img src="~/Assets/Client/assets/images/common/bg_title.png" class="title-image" alt="" />
+	</h3>
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-9">
+				<div class="news-details">
+					<h3 class="news-name">
+						@Model.Name
+					</h3>
+					<strong class="news-des">
+						@Model.Description
+					</strong>
+					<p class="news-content">
+						@Html.Raw(Model.Detail)
+					</p>
 
-		</li>
-	</ul>
+					<div style="text-align: center; margin: 20px 0">
+					<a href="@Model.ProductLink" class="btn btn--primary">Mua sản phẩm tại @Model.BrandName</a>
+					</div>
+				</div>
+				<h2 class="left-title" style="text-transform: uppercase; font-size: 16px; margin-top: 10px;">Tags </h2>
+				<div class="category-tag" style="margin-bottom: 30px;">
+					@foreach (var item in tags)
+					{
+						<a href="/tag/@item.ID" style="background: #ff6e26; color: #fff; padding:2px 5px;">@item.Name</a>}
+				</div>
+				@*Comment*@
+				<div class="comment">
+					<div class="fb-comments" data-href="https://luxubushop.somee.com" data-width="100%" data-numposts="5"></div>
+				</div>
+			</div>
+			<div class="col-xl-3">
+				<div class="related">
+					<h3 class="title">
+						<span>Bài viết liên quan</span>
+						<img src="./assets/images/common/bg_title.png" alt="" class="title-image" />
+					</h3>
+					<ul class="related-list">
+						@foreach (var item in listRelatedContent)
+						{
+							var link = "/danh-gia/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+							<li class="related-item">
+								<a href="@link" class="related-thumb">
+									<img src="@item.Image" alt="@item.Name" class="related-image" />
+								</a>
+								<div class="related-body">
+									<a href="@link">
+										<h4 class="related-name">
+											@item.Name
+										</h4>
+									</a>
+									<p class="related-des">
+										@item.Description
+									</p>
+								</div>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
 </div>

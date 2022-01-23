@@ -16,9 +16,9 @@ namespace LuxubuShop.Core.Dao
 			db = new LuxubuShopDbContext();
 		}
 		// View Deatil
-		public About ViewDetail(long id)
+		public About ViewDetail()
 		{
-			return db.Abouts.Find(id);
+			return db.Abouts.Find(1);
 		}
 
 		// Update Method
@@ -41,8 +41,7 @@ namespace LuxubuShop.Core.Dao
 				about.Description = entity.Description;
 				about.Detail = entity.Detail;
 				about.Image = entity.Image;
-				about.MetaKeywords = entity.MetaKeywords;
-				about.Status = entity.Status;
+				about.Status = true;
 				db.SaveChanges();
 				return true;
 			}

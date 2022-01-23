@@ -1,5 +1,6 @@
-﻿@using PagedList.Mvc;
-@model PagedList.IPagedList<LuxubuShop.Core.EF.Product>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<LuxubuShop.Core.ViewModels.ProductViewModel>
 
 @{
 	ViewBag.Title = "Index";
@@ -7,6 +8,9 @@
 
 }
 @section pageTitle{ Sản phẩm }
+@section jsFooter{
+	<script src="~/Assets/Admin/js/controller/productController.js"></script>
+}
 
 <div class="btn btn-primary btn-sm">
 	<i class="fas fa-plus-circle"></i>
@@ -19,29 +23,35 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3"></div>
 		<div class="card-body">
-			@using (Html.BeginForm("Index", "Product", FormMethod.Get))
-			{
-				<div class="row justify-content-end">
-					<div class="col-lg-3 col-md-3">
+			<div class="row justify-content-xl-between">
+				<div class="col-lg-3 col-md-3">
+					@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+					{
+						@Html.DropDownList("catID", new SelectList(ViewBag.CategoryID, "ID", "Name"), "All", new { onChange = "this.form.submit();", @class = "custom-select custom-select-sm form-control form-control-sm" });
+					}
+				</div>
+				<div class="col-lg-3 col-md-3">
+					@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+					{
 						<label class="d-flex align-items-center">
 							<input class="form-control form-control-sm" placeholder="Search" name="searchString" value="@ViewBag.SearchString">
 							<button type="submit" class="btn btn-outline-success btn-sm ml-1">
 								<i class="fas fa-search"></i>
 							</button>
 						</label>
-					</div>
+					}
 				</div>
-			}
+			</div>
 			<div class="table-responsive mt-3">
 				<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr class="text-center">
 							<th>Ngày tạo</th>
-							<th>Tiêu đề</th>
+							<th>Tên sản phẩm</th>
 							<th>Hình ảnh</th>
 							<th>Chuyên mục</th>
-							<th>Thống kê</th>
-							<th>Hot</th>
+							<th>Lượt xem</th>
+							<th>Nổi bật</th>
 							<th>Ngày hết hạn</th>
 							<th>Tùy chỉnh</th>
 						</tr>
@@ -49,11 +59,11 @@
 					<tfoot>
 						<tr class="text-center">
 							<th>Ngày tạo</th>
-							<th>Tiêu đề</th>
+							<th>Tên sản phẩm</th>
 							<th>Hình ảnh</th>
 							<th>Chuyên mục</th>
-							<th>Thống kê</th>
-							<th>Hot</th>
+							<th>Lượt xem</th>
+							<th>Nổi bật</th>
 							<th>Ngày hết hạn</th>
 							<th>Tùy chỉnh</th>
 						</tr>
@@ -69,9 +79,11 @@
 							<td>
 								<img src="@(item.Image)" alt="@(item.Name)" id="product-img" class="img-thumbnail" />
 							</td>
-							<td>@item.CategoryID</td>
-							<td>@item.ClickCount</td>
-							<td>@item.TopHot</td>
+							<td>@item.CateName</td>
+							<td>@item.ViewCount</td>
+							<td>
+								<input class="input-active" data-id="@item.ID" type="checkbox" @(item.TopHot ? "checked" : "")>
+							</td>
 							<td>@string.Format("{0:dd/MM/yyyy}", item.ExpirationDate)</td>
 
 							<td>

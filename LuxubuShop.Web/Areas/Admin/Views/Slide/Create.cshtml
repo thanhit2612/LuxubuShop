@@ -4,8 +4,7 @@
 	ViewBag.Title = "Create";
 	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-@section pageTitle{ Thêm Slide }
+@section  pageTitle {Thêm mới slide}
 @section jsFooter {
 	<script>
 		$('#btnSelectImage').on('click', function (e) {
@@ -23,44 +22,43 @@
 	<i class="fas fa-sign-out-alt fa-icon"></i>
 	@Html.ActionLink("Quay lại", "Index", "Slide", new { @class = "text-white" })
 </div>
-<div class="pt-4">
-	<div class="col-lg-12">
-		@using (Html.BeginForm("Create", "Slide", FormMethod.Post, new { @id = "register-form" }))
-		{
-			@Html.AntiForgeryToken()
 
+<div class="pt-4 pb-5">
+	@using (Html.BeginForm("Create", "Slide", FormMethod.Post, new { @id = "register-form" }))
+	{
+		@Html.AntiForgeryToken()
 		<div class="form-horizontal">
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-12" })
+				<div class="col-md-12">
+					@Html.TextBoxFor(model => model.Name, new { @class = "form-control form-control-sm col-md-12", @rules = "required" })
+					<small class="form-message text-danger"></small>
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-12" })
+				<div class="col-md-12">
+					@Html.TextBoxFor(model => model.Link, new { @class = "form-control form-control-sm col-md-12", @rules = "required" })
+					<small class="form-message text-danger"></small>
+				</div>
+			</div>
+
 			<div class="form-group">
 				@Html.LabelFor(model => model.Image, new { @class = "control-label col-md-12" })
 				<div class="col-md-12 d-flex">
-					@Html.TextBoxFor(model => model.Image, new { @class = "form-control form-control-sm col-md-5", @id = "urlImage" })
+					@Html.TextBoxFor(model => model.Image, new { @class = "form-control form-control-sm col-md-5", @id = "urlImage", @rules = "required" })
 					<button href="#" id="btnSelectImage" class="btn btn-warning btn-sm ml-2">Chọn ảnh</button>
 				</div>
 			</div>
 
 			<div class="form-group">
-				@Html.LabelFor(model => model.Link, new { @class = "control-label col-md-12" })
 				<div class="col-md-12">
-					@Html.TextBoxFor(model => model.Link, new { @class = "form-control form-control-sm col-md-5", @id = "urlImage" })
-				</div>
-			</div>
-
-			<div class="form-group">
-				@Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-12" })
-				<div class="col-md-12">
-					<div class="checkbox">
-						@Html.CheckBoxFor(model => model.Status)
-					</div>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="col-md-12">
-					<button type="submit" class="btn btn-primary btn-user btn-block btn-sm">Tạo mới</button>
+					<button type="submit" class="btn btn-primary btn-user btn-block btn-sm">Tao mới</button>
 				</div>
 			</div>
 		</div>
-		}
-	</div>
-</div>
+	}
 
+</div>

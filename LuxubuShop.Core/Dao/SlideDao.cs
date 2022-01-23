@@ -24,6 +24,7 @@ namespace LuxubuShop.Core.Dao
 		public long Insert(Slide entity)
 		{
 			entity.CreatedDate = DateTime.Now;
+			entity.Status = true;
 
 			db.Slides.Add(entity);
 			db.SaveChanges();
@@ -31,7 +32,7 @@ namespace LuxubuShop.Core.Dao
 		}
 
 		// Update Method
-		public Slide ViewDetail(int id)
+		public Slide GetByID(int id)
 		{
 			return db.Slides.Find(id);
 		}
@@ -40,9 +41,10 @@ namespace LuxubuShop.Core.Dao
 			try
 			{
 				var slide = db.Slides.Find(entity.ID);
+				slide.Name = entity.Name;
 				slide.Image = entity.Image;
-				slide.Status = entity.Status;
 				slide.Link = entity.Link;
+				entity.Status = true;
 
 				db.SaveChanges();
 				return true;

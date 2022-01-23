@@ -7,25 +7,31 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList.Mvc;
 using LuxubuShop.Web.Common;
+using PagedList;
 
 namespace LuxubuShop.Web.Areas.Admin.Controllers
 {
     public class ContentController : BaseController
     {
         // Lấy ra danh sách sản phẩm
-        public void SetViewBag(long? selectedId = null)
+        public void SetCatID(long? selectedId = null)
         {
-            var dao = new ProductDao();
-            ViewBag.ProductID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
+            ViewBag.CategoryID = new SelectList(new ProductCategoryDao().ListAll(), "ID", "Name", selectedId);
+        }
+        public void SetProID(long? selectedId = null)
+        {
+            ViewBag.ProductID = new SelectList(new ProductDao().ListAll(), "ID", "Name", selectedId);
         }
 
         // GET: Admin/Content
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 10, long catID = 0)
         {
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var dao = new ContentDao();
-            var model = dao.ListAllPaging(searchString, page, pageSize);
+            var model = dao.AdminListAll(searchString, catID).ToPagedList(page, pageSize); ;
             ViewBag.SearchString = searchString;
-            SetViewBag();
+
             return View(model);
         }
 
@@ -33,7 +39,8 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            SetViewBag();
+            SetCatID();
+            SetProID();
             return View();
         }
 
@@ -57,7 +64,8 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
                     SetAlert("Thêm mới bài viết thất bại !", "danger");
                 }
             }
-            SetViewBag();
+            SetCatID();
+            SetProID();
             return View("Index");
         }
 
@@ -66,9 +74,10 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
         {
             var dao = new ContentDao();
             var content = dao.ViewDetail(id);
-
             var productId = dao.GetContentByID(id);
-            SetViewBag(productId.ProductID);
+
+            SetCatID(productId.CategoryID);
+            SetProID(productId.ProductID);
             return View(content);
         }
 
@@ -90,7 +99,8 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
                     SetAlert("Cập nhật bài viết thất bại !", "error");
                 }
             }
-            SetViewBag(model.ProductID);
+            SetCatID(model.CategoryID);
+            SetProID(model.ProductID);
             return View("Index");
         }
 
@@ -107,6 +117,15 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public JsonResult ChangeTopHot(long id)
+        {
+            var result = new ContentDao().ChangeTopHot(id);
+            return Json(new
+            {
+                topHot = result,
+            });
         }
     }
 }

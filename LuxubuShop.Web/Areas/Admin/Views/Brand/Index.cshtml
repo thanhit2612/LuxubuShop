@@ -1,0 +1,67 @@
+﻿@model List<LuxubuShop.Core.EF.Brand>
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section pageTitle{ Trang liên kết }
+
+<div class="btn btn-primary btn-sm">
+	<i class="fas fa-plus-circle"></i>
+	@Html.ActionLink("Thêm mới", "Create", "Brand", new { @class = "text-white" })
+</div>
+
+<!-- Begin Page Content -->
+<div class="container-fluid mt-4">
+	<!-- DataTales Example -->
+	<div class="card shadow mb-4">
+		<div class="card-header py-3"></div>
+		<div class="card-body">
+			<div class="table-responsive mt-3">
+				<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+					<thead>
+						<tr class="text-center">
+							<th>Hình ảnh</th>
+							<th>Tiêu đề</th>
+							<th>Ngày tạo</th>
+							<th>Tùy chỉnh</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr class="text-center">
+							<th>Hình ảnh</th>
+							<th>Tiêu đề</th>
+							<th>Ngày tạo</th>
+							<th>Tùy chỉnh</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr id="row_@item.ID" class="text-center">
+								<td>
+									<img src="@(item.Image)" alt="@(item.Name)" id="product-img" class="img-thumbnail" />
+								</td>
+								<td>@item.Name</td>
+								<td>@string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</td>
+								<td>
+									<button type="button" class="btn btn-primary btn-sm">
+										@Html.ActionLink("Sửa", "Edit", new { @id = item.ID }, new { @class = "text-white" })
+									</button>
+									<button type="button" class="btn btn-danger btn-sm">
+										@Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+										   {
+											   Confirm = "Bạn chắn chắn muốn xóa tài khoản này ?",
+											   OnComplete = "$('#row_" + @item.ID + "').remove()",
+											   HttpMethod = "Delete"
+										   }, new { @class = "text-white" })
+									</button>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>

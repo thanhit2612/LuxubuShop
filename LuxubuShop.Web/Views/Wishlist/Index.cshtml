@@ -1,0 +1,115 @@
+﻿@model List<LuxubuShop.Web.Models.WishlistItem>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+	table {
+		background: #fff;
+	}
+	tr{
+		text-align: center;
+	}
+	#product-name {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-break: break-word;
+		color: #007ACC;
+	}
+	#product-img{
+		margin: 0 auto;
+		height: 120px;
+		object-fit: cover;
+	}
+
+	.btn--success {
+		background: #28a745;
+		padding: 5px 10px;
+		color: #fff;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+		font-size: 15px;
+		font-weight: 600;
+		border-radius: 4px;
+		margin-right: 4px;
+	}
+
+	.btn--danger {
+		background: #dc3545;
+		padding: 5px 10px;
+		color: #fff;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+		font-size: 15px;
+		font-weight: 600;
+		border-radius: 4px;
+	}
+</style>
+<h3 class="title">
+	<span>Sản phẩm yêu thích</span>
+	<img src="~/Assets/Client/assets/images/common/bg_title.png" class="title-image" alt="" />
+</h3>
+
+@if (Model.Count > 0)
+{
+<table width="100%" border="1">
+	<thead>
+		<tr>
+			<th>Hình ảnh</th>
+			<th>Tên sản phẩm</th>
+			<th>Giá gốc</th>
+			<th>Giá khuyến mãi</th>
+			<th>Tùy chọn</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th>Hình ảnh</th>
+			<th>Tên sản phẩm</th>
+			<th>Giá gốc</th>
+			<th>Giá khuyến mãi</th>
+			<th>Tùy chọn</th>
+		</tr>
+	</tfoot>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr id="row_@item.Product.ID" class="wishlist-item">
+				<td>
+					<img src="@(item.Product.Image)" alt="@(item.Product.Name)" id="product-img" />
+				</td>
+				<td style="max-width: 200px;">
+					<p id="product-name"><a href="@item.Product.ProductLink">@item.Product.Name</a></p>
+				</td>
+				<td>
+					<div class="product-price--old">
+						@(@item.Product.Price.HasValue ? @item.Product.Price.Value.ToString("N0"): "Liên hệ")₫
+					</div>
+				</td>
+				<td>
+					<div class="product-price--new">
+						@(@item.Product.PromotionPrice.HasValue ? @item.Product.PromotionPrice.Value.ToString("N0"): "Liên hệ")₫
+					</div>
+				</td>
+				<td>
+
+					<a href="@item.Product.ProductLink" class="btn btn--success">
+						<i class="far fa-shopping-cart"></i>
+					</a>
+					<a href="#" class="btn btn--danger" id="btn-remove" data-id="@item.Product.ID">
+						<i class="fas fa-trash-alt"></i>
+					</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+}
+else
+{
+	<p style="text-align: center; font-size: 18px">Không có sản phẩm nào !</p>
+	<img src="~/Assets/Client/assets/images/common/Empty.png" alt="No products" class="empty-products" />
+}
+

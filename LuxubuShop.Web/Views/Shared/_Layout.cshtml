@@ -1,147 +1,301 @@
-﻿<!DOCTYPE HTML>
-<html>
+﻿@{ TempData.Keep("Category");
+	var categories = (List<LuxubuShop.Core.EF.ProductCategory>)TempData["Category"];
+	TempData.Keep("Menu");
+	var menus = (List<LuxubuShop.Core.EF.Menu>)TempData["Menu"];
+	TempData.Keep("Brand");
+	var brands = (List<LuxubuShop.Core.EF.Brand>)TempData["Brand"];
+
+	TempData.Keep("Wishlists");
+	var wishlists = (List<LuxubuShop.Web.Models.WishlistItem>)TempData["Wishlists"]; }
+
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Luxubu Shop</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-	<link href="~/Assets/Client/css/slider/owl.carousel.min.css" rel="stylesheet" />
-	<link href="~/Assets/Client/css/slider/owl.theme.default.min.css" rel="stylesheet" />
-	<link href="~/Assets/Client/css/slider/slider.css" rel="stylesheet" />
-	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-	<script src="~/Assets/Client/js/jquery-3.6.0.js"></script>
-	<link href="~/Assets/Client/css/jquery-ui.css" rel="stylesheet" />
-	<link href="~/Assets/Client/css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<script type="text/javascript" src="~/Assets/Client/js/move-top.js"></script>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+		  rel="stylesheet" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&display=swap" rel="stylesheet" />
+
+	<link rel="icon" href="~/Assets/Client/assets/images/common/fiveicon.png" type="image/x-icon" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap"
+		  rel="stylesheet" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap"
+		  rel="stylesheet" />
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
+	<link rel="stylesheet"
+		  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+		  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+		  crossorigin="anonymous" />
+	<link rel="stylesheet" href="~/Assets/Client/css/library/owl.carousel.min.css" />
+	<link rel="stylesheet" href="~/Assets/Client/css/library/owl.theme.default.min.css" />
+	<link rel="stylesheet" href="~/Assets/Client/css/bootstrap-grid.min.css" />
+	<link rel="stylesheet" href="~/Assets/Client/css/app.css" />
+
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=427921829017111&autoLogAppEvents=1" nonce="fqw0MPRw"></script>
 </head>
 <body>
-	<div class="wrap">
-		<div class="header">
-			<div class="headertop_desc">
-				<div class="call">
-					<p><span>Need help?</span> call us <span><a href="#" class="number">1-22-3456789</a></span></p>
-				</div>
-				@{Html.RenderAction("TopMenu", "Home");}
-				<div class="clear"></div>
-			</div>
-			<div class="header_top">
-				<div class="logo">
-					<a href="/">
-						<img src="~/Assets/Client/images/logo.png" alt="logo" />
-					</a>
-				</div>
-				<script type="text/javascript">
-					function DropDown(el) {
-						this.dd = el;
-						this.initEvents();
-					}
-					DropDown.prototype = {
-						initEvents: function () {
-							var obj = this;
-
-							obj.dd.on('click', function (event) {
-								$(this).toggleClass('active');
-								event.stopPropagation();
-							});
-						}
-					}
-
-					$(function () {
-
-						var dd = new DropDown($('#dd'));
-
-						$(document).click(function () {
-							// all dropdowns
-							$('.wrapper-dropdown-2').removeClass('active');
-						});
-
-					});
-
-				</script>
-				<div class="clear"></div>
-			</div>
-			<div class="header_bottom">
-				@{Html.RenderAction("MainMenu", "Home");}
-				<div class="search_box">
-					<form action="/tim-kiem" method="get">
-						<input type="text" value="@ViewBag.KeyWord" id="search-input" name="q" placeholder="Nhập tên sản phẩm"><input type="submit" value="">
-					</form>
-				</div>
-				<div class="clear"></div>
-			</div>
-			@RenderSection("header_slider", required: false)
-		</div>
-		<div class="main">
-			@RenderBody()
-		</div>
+	<div class="loading">
+		<div class="dashed-loading"></div>
 	</div>
-	<div class="footer">
-		<div class="wrap">
-			<div class="section group">
-				<div class="col_1_of_4 span_1_of_4">
-					<h4>Information</h4>
-					<ul>
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="contact.html">Customer Service</a></li>
-						<li><a href="#">Advanced Search</a></li>
-						<li><a href="delivery.html">Orders and Returns</a></li>
-						<li><a href="contact.html">Contact Us</a></li>
-					</ul>
+	<div id="fb-root"></div>
+	<header class="header">
+		<div class="container">
+			<div class="row align-center">
+				<div class="d-n col-2">
+					<button class="btn btn--circle navbar-btn">
+						<i class="fas fa-bars"></i>
+					</button>
 				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<h4>Why buy from us</h4>
-					<ul>
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="contact.html">Customer Service</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="contact.html">Site Map</a></li>
-						<li><a href="#">Search Terms</a></li>
-					</ul>
+				<div class="col-xl-4 col-lg-4 col-md-4 col-7">
+					<div class="header-left">
+						<a href="/" rel="nofollow" class="logo">
+							<p class="logo-text">Lu<span>xu</span>bu<span>Sh</span>op</p>
+						</a>
+					</div>
 				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<h4>My account</h4>
-					<ul>
-						<li><a href="contact.html">Sign In</a></li>
-						<li><a href="index.html">View Cart</a></li>
-						<li><a href="#">My Wishlist</a></li>
-						<li><a href="#">Track My Order</a></li>
-						<li><a href="contact.html">Help</a></li>
-					</ul>
+				<div class="col-xl-4 col-lg-5 col-md-5 col-0">
+					<div class="header-center">
+						<div class="header-search">
+							<form action="/tim-kiem" method="GET" class="search">
+								<button class="btn">
+									<i class="fad fa-search"></i>
+								</button>
+								<input type="text" class="search-input" id="search-input" name="q" placeholder="Nhập tên sản phẩm . . ." />
+								<button class="btn search-btn" type="reset">
+									<i class="fas fa-times"></i>
+								</button>
+							</form>
+						</div>
+					</div>
 				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<h4>Contact</h4>
-					<ul>
-						<li><span>+91-123-456789</span></li>
-						<li><span>+00-123-000000</span></li>
+				<div class="col-xl-4 col-lg-3 col-md-3 col-3">
+					<div class="header-right">
+						<div class="wishlist">
+							<a href="#" class="btn btn--circle wishlist-btn">
+								<i class="fas fa-heart"></i>
+							</a>
+							<div class="wishlist-box">
+								<h3 class="title">
+									<span>Sản phẩm yêu thích</span>
+									<img src="~/Assets/Client/assets/images/common/bg_title.png" class="title-image" alt="" />
+								</h3>
+								<ul class="wishlist-list">
+									@{Html.RenderAction("HeaderWishlist", "Home");}
+								</ul>
+								<a href="yeu-thich" class="wishlist-details"> Xem tất cả </a>
+							</div>
+						</div>
+						<div class="account">
+							@{ var session = (LuxubuShop.Web.Common.UserLogin)Session[LuxubuShop.Web.Common.CommonConstants.CUSTOMER_SESSION]; }
+							@if (session == null)
+							{
+				<a href="dang-nhap" class="btn btn--primary"> Đăng nhập </a> }
+			else
+			{
+<a href="#" class="btn btn--circle account-btn">
+	<i class="fas fa-user"></i>
+</a>
+				<div class="account-box">
+					<ul class="account-list">
+						<li class="account-item">
+							@if (session.Image != null)
+							{
+			<img src="@session.Image" alt="" class="account-image" /> }
+		else
+		{
+<img src="~/Assets/Client/assets/images/common/avatar.png" alt="" class="account-image" />}
+							<span class="account-info">@session.Name</span>
+							<span class="account-info">@session.Email</span>
+						</li>
+						<li class="account-item">
+							<a href="/User/Logout" class="account-link">
+								<span>Đăng xuất</span>
+								<i class="fas fa-sign-out-alt"></i>
+							</a>
+						</li>
 					</ul>
-					<div class="social-icons">
-						<h4>Follow Us</h4>
-						<ul>
-							<li><a href="#" target="_blank"><img src="~/Assets/Client/images/facebook.png" alt="" /></a></li>
-							<li><a href="#" target="_blank"><img src="~/Assets/Client/images/twitter.png" alt="" /></a></li>
-							<li><a href="#" target="_blank"><img src="~/Assets/Client/images/skype.png" alt="" /> </a></li>
-							<li><a href="#" target="_blank"> <img src="~/Assets/Client/images/dribbble.png" alt="" /></a></li>
-							<li><a href="#" target="_blank"> <img src="~/Assets/Client/images/linkedin.png" alt="" /></a></li>
-							<div class="clear"></div>
-						</ul>
+				</div>}
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
+	</header>
+	<main class="main">
+		<div class="main-left">
+			<div class="navbar">
+				<h3 class="title">
+					<span>Danh mục</span>
+					<img src="~/Assets/Client/assets/images/common/bg_title.png" class="titleimage" alt="" />
+				</h3>
+				<ul class="">
+					@{Html.RenderAction("Category", "Product");}
+				</ul>
+			</div>
+		</div>
+		<div class="main-right">
+			<div class="container">
+				<div class="menu">
+					<button class="btn navbar-btn">
+						<i class="fas fa-bars"></i>
+					</button>
+					<ul>
+						@{Html.RenderAction("MainMenu", "Home");}
+					</ul>
+				</div>
+				@RenderBody()
+				<div class="brand">
+					<h3 class="title">
+						<span>Trang liên kết</span>
+						<img src="~/Assets/Client/assets/images/common/bg_title.png" alt="" class="title-image" />
+					</h3>
+					<div class="owl-carousel owl-theme" id="brand">
+						@{Html.RenderAction("Brand", "Product");}
+					</div>
+				</div>
+				<!-- START: FOOTER -->
+				<footer class="footer">
+					<div class="footer-top">
+						<div class="container">
+							<div class="row">
+								<div class="col-xl-3 col-lg-3 col-md-3 col-7">
+									<div class="footer-item">
+										<div class="header-left">
+											<a href="/" class="logo">
+												<p class="logo-text">Lu<span>xu</span>bu<span>Sh</span>op</p>
+											</a>
+										</div>
+										<small>Giới thiệu về website của chúng tôi</small>
+									</div>
+								</div>
+								<div class="col-xl-3 col-lg-3 col-md-3 col-5">
+									<div class="footer-item">
+										<h3 class="title">Menu</h3>
+										<ul class="category">
+											@foreach (var item in menus)
+											{
+								<li class="category-item">
+									<a href="@item.Link" class="category-link">@item.Text</a>
+								</li>
+}
+										</ul>
+									</div>
+								</div>
+								<div class="col-xl-3 col-lg-3 col-md-3 col-7">
+									<div class="footer-item">
+										<h3 class="title">Trang liên kết</h3>
+										<ul class="category">
+											@foreach (var item in brands)
+											{
+								<li class="category-item">
+									<a href="@item.Link" class="category-link">@item.Name</a>
+								</li>
+}
+										</ul>
+									</div>
+								</div>
+								<div class="col-xl-3 col-lg-3 col-md-3 col-5">
+									<div class="footer-item">
+										<h3 class="title">Danh mục</h3>
+										<ul class="category">
+											@foreach (var item in categories)
+											{
+								<li class="category-item">
+									<a href="#" class="category-link">@item.Name</a>
+								</li>
+}
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="footer-bottom">
+						<small>copyright &copy; <a href="/">luxubshop.com</a></small>
+					</div>
+				</footer>
+				<!-- END: FOOTER -->
+			</div>
+		</div>
+		<div class="overlay"></div>
+		@if (TempData["AlertMessage"] != null)
+		{
+<div id="toast" class="hide">
+	<div class="toast @TempData["AlertType"]">
+		<div class="toast__icon"><i class="@TempData["AlertIcon"]"></i></div>
+		<div class="toast__body">
+			<p class="toast__message">@TempData["AlertMessage"]</p>
+		</div>
 	</div>
-	<a href="#" id="toTop"><span id="toTopHover"> </span></a>
+</div>}
+		<div class="top">
+			<button class="btn top-btn">
+				<i class="fas fa-arrow-alt-to-top"></i>
+			</button>
+		</div>
+	</main>
+	<div class="mobile-menu">
+		<div class="container">
+			<ul class="menu">
+				<li class="menu-item">
+					<a href="/" class="menu-link">
+						<i class="fas fa-home"></i>
+						<span class="menu-name">Trang chủ</span>
+					</a>
+				</li>
+				<li class="menu-item">
+					<a href="/product.html" class="menu-link">
+						<i class="fas fa-box-open"></i>
+						<span class="menu-name">Sản phẩm</span>
+					</a>
+				</li>
+				<li class="menu-item">
+					<a href="#" class="menu-link">
+						<i class="fas fa-address-card"></i>
+						<span class="menu-name">Giới thiệu</span>
+					</a>
+				</li>
+				<li class="menu-item">
+					<a href="/news.html" class="menu-link">
+						<i class="fas fa-file-signature"></i>
+						<span class="menu-name">Bài viết</span>
+					</a>
+				</li>
+				<li class="menu-item">
+					<a href="#" class="menu-link">
+						<i class="fas fa-search"></i>
+						<span class="menu-name">Tìm kiếm</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 
+	<script src="~/Assets/Client/js/library/jquery.min.js"></script>
+	<script src="~/Assets/Client/js/library/owl.carousel.js"></script>
+	<script src="https://unpkg.com/scrollreveal"></script>
+	<script src="~/Assets/Client/js/main.js"></script>
+	<script src="~/Assets/Client/js/slider.js"></script>
+	<script src="~/Assets/Client/js/scroll.js"></script>
 
-	<script src="~/Assets/Client/js/slider/jquery.min.js"></script>
-	<script src="~/Assets/Client/js/jquery-ui.js"></script>
-	<script src="~/Assets/Client/js/slider/owl.carousel.js"></script>
-	<script src="~/Assets/Client/js/slider/slider.js"></script>
-	<script src="~/Assets/Client/js/movetop.js"></script>
-	<script src="~/Assets/Client/js/baseController.js"></script>
+	<script src="~/Assets/Client/js/controller/contentCountController.js"></script>
+	<script src="~/Assets/Client/js/controller/productCountController.js"></script>
+	<script src="~/Assets/Client/js/controller/wishlistController.js"></script>
+	<script src="~/Assets/Client/js/controller/toast.js"></script>
+	@RenderSection("jsFooter", required: false)
 </body>
 </html>
-
-
-
-

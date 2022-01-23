@@ -8,13 +8,15 @@
 @section pageTitle{ Giới thiệu }
 
 <div class="btn btn-primary btn-sm">
-	<i class="fas fa-sign-out-alt fa-icon"></i>
+	<i class="fas fa-edit"></i>
 	@Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ID }, new { @class = "text-white" })
 </div>
 
 
-<div>
-	<h3>@(Model.Name)</h3>
-	<p style="text-align: justify">@(Model.Description)</p>
-	<p style="text-align: justify">@Html.Raw(Model.Detail)</p>
+<div class="pt-5">
+	<div class="container">
+		<h3 class="font-weight-bold">@(Model.Name)</h3>
+		<p style="text-align: justify">@(Model.Description)</p>
+		<p style="text-align: justify">@Html.Raw(Model.Detail)</p>
+	</div>
 </div>

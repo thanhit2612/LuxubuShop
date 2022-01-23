@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList.Mvc;
+using LuxubuShop.Core.Dao.UserModel;
 
 namespace LuxubuShop.Web.Areas.Admin.Controllers
 {
@@ -34,8 +35,11 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 			if (ModelState.IsValid)
 			{
 				var dao = new UserDao();
+
 				var encryptedMd5Pas = Encryptor.MD5Hash(user.Password);
 				user.Password = encryptedMd5Pas;
+				user.GroupID = "ADMIN";
+				user.CreatedDate = DateTime.Now;
 				long id = dao.Insert(user);
 
 				if (id > 0)
@@ -47,6 +51,8 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 				{
 					SetAlert("Thêm mới tài khoản thất bại !", "danger");
 				}
+
+
 			}
 			return View("Index");
 		}
@@ -54,7 +60,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 		// GET: Admin/User/Edit
 		public ActionResult Edit(int id)
 		{
-			var user = new UserDao().ViewDetail(id);
+			var user = new UserDao().GetById(id);
 			return View(user);
 		}
 		// POST: Admin/User/Edit

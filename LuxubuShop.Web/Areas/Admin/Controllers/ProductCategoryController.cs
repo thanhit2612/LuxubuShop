@@ -11,19 +11,13 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 {
 	public class ProductCategoryController : BaseController
 	{
-		// Lấy ra danh sách danh mục cha
-		public void SetViewBag(long? selectedId = null)
-		{
-			var dao = new ProductCategoryDao();
-			ViewBag.ParentID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
-		}
 		// GET: Admin/ProductCategory
 		public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
 		{
 			var dao = new ProductCategoryDao();
-			var model = dao.ListAllPaging(searchString, page, pageSize);
+			var model = dao.AdminListAll(searchString, page, pageSize);
 			ViewBag.SearchString = searchString;
-			SetViewBag();
+			
 			return View(model);
 		}
 
@@ -31,7 +25,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 		[HttpGet]
 		public ActionResult Create()
 		{
-			SetViewBag();
+			
 			return View();
 		}
 
@@ -56,17 +50,15 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 					SetAlert("Thêm mới danh mục thất bại !", "error");
 				}
 			}
-			SetViewBag();
+		
 			return View("Index");
 		}
 		// GET: Admin/ProductCategory/Edit/
 		public ActionResult Edit(int id)
 		{
 			var dao = new ProductCategoryDao();
-			var proCategory = dao.ViewDetail(id);
+			var proCategory = dao.GetById(id);
 
-			var parentID = dao.ParentID(id);
-			SetViewBag(parentID.ParentID);
 			return View(proCategory);
 		}
 
@@ -88,7 +80,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 					SetAlert("Cập nhật danh mục thất bại !", "error");
 				}
 			}
-			SetViewBag(model.ParentID);
+		
 			return View("Index");
 		}
 

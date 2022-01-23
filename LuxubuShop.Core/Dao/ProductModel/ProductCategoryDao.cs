@@ -16,12 +16,9 @@ namespace LuxubuShop.Core.Dao
 		{
 			db = new LuxubuShopDbContext();
 		}
-		public List<ProductCategory> ListAll()
-		{
-			return db.ProductCategories.Where(x => x.Status == true).OrderBy(x => x.DisplayOrder).ToList();
-		}
-		// Get Method
-		public IEnumerable<ProductCategory> ListAllPaging(string searchString, int page, int pageSize)
+		/*<!--START: ADMIN-->*/
+		// Index
+		public IEnumerable<ProductCategory> AdminListAll(string searchString, int page, int pageSize)
 		{
 			IQueryable<ProductCategory> model = db.ProductCategories;
 			if (!string.IsNullOrEmpty(searchString))
@@ -30,28 +27,24 @@ namespace LuxubuShop.Core.Dao
 			}
 			return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
 		}
-
-		// Insert Method
+		//Insert
 		public long Insert(ProductCategory entity)
 		{
 			if (string.IsNullOrEmpty(entity.MetaTitle))
 			{
 				entity.MetaTitle = StringHelper.ToUnsignString(entity.Name);
 			}
-			if (string.IsNullOrEmpty(entity.MetaDescriptions))
-			{
-				entity.MetaDescriptions = StringHelper.ToUnsignString(entity.Name);
-			}
 			entity.CreatedDate = DateTime.Now;
+			entity.Status = true;
 			db.ProductCategories.Add(entity);
 			db.SaveChanges();
 			return entity.ID;
 		}
-		public ProductCategory ParentID(long id)
+		// Update
+		public ProductCategory GetById(long id)
 		{
 			return db.ProductCategories.Find(id);
 		}
-		// Update Method
 		public bool Update(ProductCategory entity)
 		{
 			try
@@ -61,17 +54,9 @@ namespace LuxubuShop.Core.Dao
 				{
 					proCategory.MetaTitle = StringHelper.ToUnsignString(entity.Name);
 				}
-				if (string.IsNullOrEmpty(entity.MetaDescriptions))
-				{
-					proCategory.MetaDescriptions = StringHelper.ToUnsignString(entity.Name);
-				}
-				proCategory.ParentID = entity.ParentID;
 				proCategory.Name = entity.Name;
-				proCategory.Descriptions = entity.Descriptions;
-				proCategory.SeoTitle = entity.SeoTitle;
-				proCategory.MetaKeywords = entity.MetaKeywords;
-				proCategory.Status = entity.Status;
-				proCategory.ShowOnHome = entity.ShowOnHome;
+				proCategory.Image = entity.Image;
+				proCategory.Status = true;
 				db.SaveChanges();
 				return true;
 			}
@@ -80,11 +65,7 @@ namespace LuxubuShop.Core.Dao
 				return false;
 			}
 		}
-		public ProductCategory ViewDetail(long id)
-		{
-			return db.ProductCategories.Find(id);
-		}
-		// Delete Method
+		// Delete
 		public bool Delete(int id)
 		{
 			try
@@ -100,5 +81,14 @@ namespace LuxubuShop.Core.Dao
 				return false;
 			}
 		}
+		/*<!--END: ADMIN-->*/
+
+		/*<!--START: CLIENT-->*/
+		// List All
+		public List<ProductCategory> ListAll()
+		{
+			return db.ProductCategories.Where(x => x.Status == true).ToList();
+		}
+		/*<!--END: CLIENT-->*/
 	}
 }

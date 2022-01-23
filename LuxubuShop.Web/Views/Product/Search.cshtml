@@ -7,39 +7,65 @@
 	var keyword = ViewBag.KeyWord;
 }
 
-
-<div class="content">
-	<div class="content_top">
-		<div class="heading">
-			<h3>Kết quả tìm kiếm @keyword</h3>
-		</div>
-		<div class="see">
-			<p><a href="#">Xem tất cả</a></p>
-		</div>
-		<div class="clear"></div>
-	</div>
-	<div class="section group">
-		@foreach (var item in Model)
-		{
-			var link = "/tim-kiem?q=" + keyword;
-			<div class="grid_1_of_4 images_1_of_4">
-				<a href="@link"><img src="@item.Image" alt="" /></a>
-				<h2>@item.Name</h2>
-				<div class="price-details">
-					<div class="price-number">
-						<p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ") VNĐ</span></p>
-					</div>
-					<div class="add-cart">
-						<h4><a href="@item.ProductLink">Xem sản phẩm</a></h4>
-						<h4><a href="@link">Xem đánh giá</a></h4>
-					</div>
-					<div class="clear"></div>
+<div class="product">
+	<h3 class="title">
+		<span>Kết quả tìm kiếm cho: @keyword</span>
+		<img src="~/Assets/Client/assets/images/common/bg_title.png" class="title-image" alt="" />
+	</h3>
+	@if (Model.Count > 0)
+	{
+<div class="product-list">
+	@foreach (var item in Model)
+	{
+	var link = "/danh-gia/" + item.MetaTitle + "-" + item.ID;
+		<div class="product-item">
+			<div class="product-thumb">
+				<img src="@item.Image" class="product-image" alt="@item.Name" />
+				<div class="product-overlay">
+					<button class="btn btn--circle btn-like">
+						<a href="/them-yeu-thich?productId=@item.ID&quantity=1">
+							<i class="fas fa-heart"></i>
+						</a>
+					</button>
 				</div>
 			</div>
-		}
-	</div>
-	<div class="pageList">
-		Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-		@Html.PagedListPager(Model, page => Url.Action("Category", new { page }))
-	</div>
+			<div class="product-body">
+				<div class="product-review">
+					<div class="product-rating">
+						@for (int i = 0; i < item.Rating; i++)
+						{
+							<i class="fas fa-star"></i>
+						}
+						@for (int i = (item.Rating); i < 5; i++)
+						{
+							<i class="fas fa-star-half-alt"></i>
+						}
+					</div>
+					<i class="fas fa-eye"> @item.ViewCount</i>
+				</div>
+				<div class="product-info">
+					<div class="product-price">
+						<div class="product-price--old">
+							@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ")₫
+						</div>
+						<div class="product-price--new">
+							@(item.Price.HasValue ? item.PromotionPrice.Value.ToString("N0"): "Liên hệ")₫
+						</div>
+					</div>
+					<h4 class="product-name">
+						<a href="@link">@item.Name</a>
+					</h4>
+				</div>
+				<div class="product-buy">
+					<a href="@item.ProductLink" class="btn btn-buy  product-counter" target="_blank" data-id="@item.ID">Mua sản phẩm</a>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+	}
+	else
+	{
+		<img src="~/Assets/Client/assets/images/common/Empty.png" alt="No products" class="empty-products" />
+	}
 </div>

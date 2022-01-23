@@ -17,7 +17,7 @@ namespace LuxubuShop.Web
 			routes.MapRoute(
 				name: "Product Category",
 				url: "san-pham/{metaTitle}-{id}",
-				defaults: new { controller = "Product", action = "Category", id = UrlParameter.Optional },
+				defaults: new { controller = "Product", action = "ProductCategory", id = UrlParameter.Optional },
 				namespaces: new[] { "LuxubuShop.Web.Controllers" }
 			);
 			// Danh sách tất cả sản phẩm
@@ -25,6 +25,13 @@ namespace LuxubuShop.Web
 				name: "Product",
 				url: "san-pham",
 				defaults: new { controller = "Product", action = "Index", id = UrlParameter.Optional },
+				namespaces: new[] { "LuxubuShop.Web.Controllers" }
+			);
+			// Thêm sản phẩm yêu thích
+			routes.MapRoute(
+				name: "Add Wishest",
+				url: "them-yeu-thich",
+				defaults: new { controller = "Wishlist", action = "AddItem", id = UrlParameter.Optional },
 				namespaces: new[] { "LuxubuShop.Web.Controllers" }
 			);
 			// Danh sách bài viết theo từng sản phẩm
@@ -51,15 +58,29 @@ namespace LuxubuShop.Web
 			// Giới thiệu
 			routes.MapRoute(
 			  name: "About",
-			  url: "gioi-thieu/{id}",
-			  defaults: new { controller = "About", action = "Index", id = UrlParameter.Optional },
+			  url: "gioi-thieu",
+			  defaults: new { controller = "About", action = "Detail", id = UrlParameter.Optional },
 			  namespaces: new[] { "LuxubuShop.Web.Controllers" }
 		  );
 			// Đăng nhập
 			routes.MapRoute(
 			  name: "Login",
 			  url: "dang-nhap",
-			  defaults: new { controller = "Login", action = "LoginFacebook", id = UrlParameter.Optional },
+			  defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional },
+			  namespaces: new[] { "LuxubuShop.Web.Controllers" }
+			);
+			// Đăng ký
+			routes.MapRoute(
+			  name: "Register",
+			  url: "dang-ky",
+			  defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
+			  namespaces: new[] { "LuxubuShop.Web.Controllers" }
+			);
+			// Đăng ký
+			routes.MapRoute(
+			  name: "ForgotPassword",
+			  url: "quen-mat-khau",
+			  defaults: new { controller = "User", action = "ForgotPassword", id = UrlParameter.Optional },
 			  namespaces: new[] { "LuxubuShop.Web.Controllers" }
 			);
 			// Tags
@@ -76,7 +97,12 @@ namespace LuxubuShop.Web
 			  defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
 			  namespaces: new[] { "LuxubuShop.Web.Controllers" }
 			);
-
+			routes.MapRoute(
+			  name: "Wishlist",
+			  url: "yeu-thich",
+			  defaults: new { controller = "Wishlist", action = "Index", id = UrlParameter.Optional },
+			  namespaces: new[] { "LuxubuShop.Web.Controllers" }
+			);
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",

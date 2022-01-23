@@ -1,0 +1,30 @@
+﻿@model LuxubuShop.Core.EF.About
+
+@{
+	ViewBag.Title = "Detail";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="news">
+	<h3 class="title">
+		<span>Gới thiệu</span>
+		<img src="~/Assets/Client/assets/images/common/bg_title.png" class="title-image" alt="" />
+	</h3>
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="news-details">
+					<h3 class="news-name">
+						@(Model.Name)
+					</h3>
+					<strong class="news-des">
+						@(Model.Description)
+					</strong>
+					<p class="news-content">
+						@Html.Raw(Model.Detail)
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

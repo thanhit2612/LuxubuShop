@@ -1,4 +1,4 @@
-namespace LuxubuShop.Core.EF
+﻿namespace LuxubuShop.Core.EF
 {
     using System;
     using System.Collections.Generic;
@@ -11,23 +11,28 @@ namespace LuxubuShop.Core.EF
     {
         public long ID { get; set; }
 
-        public long? CategoryID { get; set; }
-
         [StringLength(250)]
+        [Display(Name = "Tiêu đề")]
         public string Name { get; set; }
 
         [StringLength(500)]
-        public string Descriptions { get; set; }
+        [Display(Name = "Mô tả")]
+        public string Description { get; set; }
 
         [StringLength(250)]
+        [Display(Name = "Chọn ảnh")]
         public string Image { get; set; }
 
+        [Display(Name = "Giá gốc")]
         public decimal? Price { get; set; }
-
+        [Display(Name = "Giá khuyến mãi")]
         public decimal? PromotionPrice { get; set; }
 
-        [StringLength(250)]
-        public string ProductLink { get; set; }
+        [Display(Name = "Danh mục")]
+        public long? CategoryID { get; set; }
+
+        [Display(Name = "Trang liên kết")]
+        public long? BrandID { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
@@ -37,20 +42,25 @@ namespace LuxubuShop.Core.EF
         public string CreatedBy { get; set; }
 
         [StringLength(250)]
-        public string MetaTitle { get; set; }
-
-        [StringLength(500)]
-        public string MetaDescriptions { get; set; }
+        [Display(Name = "Từ khóa")]
+        public string Keywords { get; set; }
 
         [StringLength(250)]
-        public string MetaKeywords { get; set; }
+        public string MetaTitle { get; set; }
 
-        public bool Status { get; set; }
-
-        public int? ClickCount { get; set; }
+        [StringLength(250)]
+        public string MetaDescription { get; set; }
 
         public bool TopHot { get; set; }
 
+        public bool Status { get; set; }
+
+        public int ViewCount { get; set; }
+
         public int Rating { get; set; }
+
+        [StringLength(250)]
+        [Display(Name = "Link sản phẩm")]
+        public string ProductLink { get; set; }
     }
 }
