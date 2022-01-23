@@ -11,18 +11,11 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 {
 	public class MenuController : BaseController
 	{
-		// Lấy ra danh sách sản phẩm
-		public void SetViewBag(long? selectedId = null)
-		{
-			var dao = new MenuTypeDao();
-			ViewBag.TypeID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
-		}
 		// GET: Admin/Menu
-		public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
+		public ActionResult Index()
 		{
 			var dao = new MenuDao();
-			var model = dao.ListAllPaging(searchString, page, pageSize);
-			ViewBag.SearchString = searchString;
+			var model = dao.ListAll();
 			return View(model);
 		}
 
@@ -30,12 +23,11 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 		[HttpGet]
 		public ActionResult Create()
 		{
-			SetViewBag();
 			return View();
 		}
 
 		// POST: Admin/Menu/Create
-		[HttpPost]
+		[HttpPost, ValidateInput(false)]
 		public ActionResult Create(Menu menu)
 		{
 			if (ModelState.IsValid)
@@ -51,7 +43,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 					SetAlert("Thêm mới thất bại !", "danger");
 				}
 			}
-			SetViewBag();
+		
 			return View("Index");
 		}
 
@@ -59,15 +51,15 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 		public ActionResult Edit(int id)
 		{
 			var dao = new MenuDao();
-			var menu = dao.ViewDetail(id);
+			var menu = dao.GetMenuByID(id);
 
 			var typeId = dao.GetMenuByID(id);
-			SetViewBag(typeId.TypeID);
+		
 			return View(menu);
 		}
 
 		// POST: Admin/Menu/Edit/5
-		[HttpPost]
+		[HttpPost, ValidateInput(false)]
 		public ActionResult Edit(Menu model)
 		{
 			if (ModelState.IsValid)
@@ -83,7 +75,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 					SetAlert("Cập nhật thất bại !", "error");
 				}
 			}
-			SetViewBag(model.TypeID);
+			
 			return View("Index");
 		}
 

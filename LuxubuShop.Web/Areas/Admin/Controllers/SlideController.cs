@@ -44,7 +44,7 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
 		[HttpGet]
 		public ActionResult Edit(int id)
 		{
-			var slide = new SlideDao().ViewDetail(id);
+			var slide = new SlideDao().GetByID(id);
 			return View(slide);
 		}
 		// POST: Admin/User/Create

@@ -1,118 +1,168 @@
-﻿@{
+﻿
+@{
 	ViewBag.Title = "Index";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	var listNewProduct = (List<LuxubuShop.Core.EF.Product>)ViewBag.NewProducts;
-	var listFeatureProduct = (List<LuxubuShop.Core.EF.Product>)ViewBag.featureProducts;
+	var listFeatureProduct = (List<LuxubuShop.Core.EF.Product>)ViewBag.FeatureProducts;
+	var listFeatureContents = (List<LuxubuShop.Core.EF.Content>)ViewBag.FeatureContents; 
+
 	var listSlide = (List<LuxubuShop.Core.EF.Slide>)ViewBag.Slides;
+	var listBanner = (List<LuxubuShop.Core.EF.Banner>)ViewBag.Banners;
 }
 
-@section header_slider {
-	<div class="header_slide">
-		@{ Html.RenderAction("ProductCategory", "Product");}
-		<div class="header_bottom_right">
-			<div class="slider">
-				<div id="slider">
-					<div class="owl-carousel owl-theme" id="banner-slider">
-						@foreach (var item in listSlide)
-						{
-							<div class="item">
-								<a href="@(item.Link)">
-									<img src="@(item.Image)" alt="" class="slider-img">
-								</a>
-							</div>
-						}
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="clear"></div>
-	</div>
-}
-<div class="content">
-	<div class="content_top">
-		<div class="heading">
-			<h3>Sản phẩm mới</h3>
-		</div>
-		<div class="see">
-			<p><a href="/san-pham">Xem tất cả</a></p>
-		</div>
-		<div class="clear"></div>
-	</div>
-	<div class="section group">
-		@foreach (var item in listNewProduct)
+<div class="slider">
+	<div class="owl-carousel owl-theme" id="slider">
+		@foreach (var item in listSlide)
 		{
-			var link = "/danh-gia/" + item.MetaTitle + "-" + item.ID;
-		<div class="grid_1_of_4 images_1_of_4">
-			<a href="@link"><img src="@item.Image" alt="@item.Name" /></a>
-			<h2>@item.Name</h2>
-			<h3>
-				<i class="fa fa-eye" aria-hidden="true"></i>
-				@item.ClickCount
-			</h3>
-			<h3>
-				@for (int i = 0; i < item.Rating; i++)
-				{
-				<i class="fas fa-star"></i>
-				}
-				@for (int i = (item.Rating); i < 5; i++)
-				{
-			<i class="far fa-star"></i>
-				}
-			</h3>
-
-			<div class="price-details">
-				<div class="price-number">
-					<p style="text-decoration:line-through; opacity: .8"><span class="rupees">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0"): "Liên hệ") VNĐ</span></p>
-					<p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ") VNĐ</span></p>
-				</div>
-				<div class="add-cart">
-					<h4><a href="@item.ProductLink" target="_blank">Xem sản phẩm</a></h4>
-					<h4>@Html.ActionLink("Xem đánh giá", "ClickCount", "Product", new { id = item.ID }, null)</h4>
-				</div>
-				<div class="clear"></div>
+			<div class="item">
+				<a href="@item.Link">
+					<img src="@item.Image" title="@item.Name" alt="@item.Name" class="slider-image" />
+				</a>
 			</div>
-		</div>
 		}
 	</div>
-	<div class="content_bottom">
-		<div class="heading">
-			<h3>Sản phẩm nổi bật</h3>
-		</div>
-		<div class="see">
-			<p><a href="/san-pham">Xem tất cả</a></p>
-		</div>
-		<div class="clear"></div>
-	</div>
-	<div class="section group">
+</div>
+<div class="product">
+	<h3 class="title">
+		<span>Sản nổi bật</span>
+		<img src="~/Assets/Client/assets/images/common/bg_title.png" class="title-image" alt="" />
+	</h3>
+	<div class="product-list">
 		@foreach (var item in listFeatureProduct)
 		{
 			var link = "/danh-gia/" + item.MetaTitle + "-" + item.ID;
-			<div class="grid_1_of_4 images_1_of_4">
-				<a href="@link"><img src="@item.Image" alt="@item.Name" /></a>
-				<h2>@item.Name</h2>
-				<h3>
-					<i class="fa fa-eye" aria-hidden="true"></i>
-					@item.ClickCount
-				</h3>
-				<div class="price-details">
-					<div class="price-number">
-						<p style="text-decoration:line-through; opacity: .8"><span class="rupees">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0"): "Liên hệ") VNĐ</span></p>
-						<p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ") VNĐ</span></p>
-					</div>
-					<div class="add-cart">
-						<h4><a href="@item.ProductLink">Xem sản phẩm</a></h4>
-						<h4 style="margin-top: 5px;">
-							<a href="@link">
-								Xem đánh giá
+			<div class="product-item">
+				<div class="product-thumb">
+					<img src="@item.Image" class="product-image" alt="@item.Name" />
+					<div class="product-overlay">
+						<button class="btn btn--circle btn-like">
+							<a href="/them-yeu-thich?productId=@item.ID&quantity=1">
+								<i class="fas fa-heart"></i>
 							</a>
+						</button>
+					</div>
+				</div>
+				<div class="product-body">
+					<div class="product-review">
+						<div class="product-rating">
+							@for (int i = 0; i < item.Rating; i++)
+							{
+								<i class="fas fa-star"></i>
+							}
+							@for (int i = (item.Rating); i < 5; i++)
+							{
+								<i class="fas fa-star-half-alt"></i>
+							}
+						</div>
+						<i class="fas fa-eye"> @item.ViewCount</i>
+					</div>
+					<div class="product-info">
+						<div class="product-price">
+							<div class="product-price--old">
+								@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ")₫
+							</div>
+							<div class="product-price--new">
+								@(item.Price.HasValue ? item.PromotionPrice.Value.ToString("N0"): "Liên hệ")₫
+							</div>
+						</div>
+						<h4 class="product-name">
+							<a href="@link">@item.Name</a>
 						</h4>
 					</div>
-					<div class="clear"></div>
+					<div class="product-buy">
+						<a href="@item.ProductLink" class="btn btn-buy  product-counter" target="_blank" data-id="@item.ID">Mua sản phẩm</a>
+					</div>
 				</div>
 			</div>
 		}
 	</div>
 </div>
-
-
-
+<div class="banners">
+	<div class="row">
+		@foreach (var item in listBanner)
+		{
+			<div class="col-xl-6 col-lg-6">
+				<a href="@item.Link" class="banner">
+					<img src="@item.Image" alt="@item.Name" class="banner-image" />
+				</a>
+			</div>
+		}
+	</div>
+</div>
+<div class="product">
+	<h3 class="title">
+		<span>Sản phẩm mới</span>
+		<img src="~/Assets/Client/assets/images/common/bg_title.png" class="title-image" alt="" />
+	</h3>
+	<div class="product-list">
+		@foreach (var item in listNewProduct)
+		{
+			var link = "/danh-gia/" + item.MetaTitle + "-" + item.ID;
+			<div class="product-item">
+				<div class="product-thumb">
+					<img src="@item.Image" class="product-image" alt="@item.Name" />
+					<div class="product-overlay">
+						<button class="btn btn--circle btn-like">
+							<a href="/them-yeu-thich?productId=@item.ID&quantity=1">
+								<i class="fas fa-heart"></i>
+							</a>
+						</button>
+					</div>
+				</div>
+				<div class="product-body">
+					<div class="product-review">
+						<div class="product-rating">
+							@for (int i = 0; i < item.Rating; i++)
+							{
+								<i class="fas fa-star"></i>
+							}
+							@for (int i = (item.Rating); i < 5; i++)
+							{
+								<i class="fas fa-star-half-alt"></i>
+							}
+						</div>
+						<i class="fas fa-eye"> @item.ViewCount</i>
+					</div>
+					<div class="product-info">
+						<div class="product-price">
+							<div class="product-price--old">
+								@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ")₫
+							</div>
+							<div class="product-price--new">
+								@(item.Price.HasValue ? item.PromotionPrice.Value.ToString("N0"): "Liên hệ")₫
+							</div>
+						</div>
+						<h4 class="product-name">
+							<a href="@link">@item.Name</a>
+						</h4>
+					</div>
+					<div class="product-buy">
+						<a href="@item.ProductLink" target="_blank" class="btn btn-buy product-counter" data-id="@item.ID">Mua sản phẩm</a>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+<div class="posts">
+    <h3 class="title">
+        <span>Bài viết nổi bật</span>
+        <img src="~/Assets/Client/assets/images/common/bg_title.png" alt="" class="title-image" />
+    </h3>
+    <div class="owl-carousel owl-theme" id="posts">
+		@foreach (var item in listFeatureContents)
+		{
+			var link = "/danh-gia/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+			<div class="item">
+				<div class="posts-item">
+					<a href="@link" class="content-counter" data-id="@item.ID">
+						<img src="@item.Image" alt="@item.Name" class="posts-image" />
+						<h4 class="posts-name">
+							@item.Name
+						</h4>
+					</a>
+				</div>
+			</div>
+		}
+    </div>
+</div>

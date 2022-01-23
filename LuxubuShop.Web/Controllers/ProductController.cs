@@ -6,45 +6,47 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using LuxubuShop.Core.EF;
+using LuxubuShop.Core.Dao.ProductModel;
 
 namespace LuxubuShop.Web.Controllers
 {
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult Index(int page = 1, int pageSize = 12)
+        public ActionResult Index(int page = 1, int pageSize = 20)
         {
             var model = new ProductDao().ListAll().OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
             return View(model);
         }
         // Hiển thị danh mục sản phẩm
         [ChildActionOnly]
-        public PartialViewResult ProductCategory()
+        [OutputCache(Duration = 3600)]
+        public PartialViewResult Category()
         {
             var model = new ProductCategoryDao().ListAll();
             return PartialView(model);
         }
+
+        [ChildActionOnly]
+        [OutputCache(Duration = 3600)]
+        public PartialViewResult Brand()
+        {
+            var model = new BrandDao().ListAll();
+            return PartialView(model);
+        }
         // Lấy ra sản phẩm cho từng danh mục
-        public ActionResult Category(long id, int page = 1, int pageSize = 12)
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "id")]
+        public ActionResult ProductCategory(long id, int page = 1, int pageSize = 20)
 		{
-            var category = new ProductCategoryDao().ViewDetail(id);
-            ViewBag.Category = category;
+            var productCategory = new ProductCategoryDao().GetById(id);
+            ViewBag.ProductCategory = productCategory;
 
             var model = new ProductDao().ListByCategoryId(id).OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
             return View(model);
 		}
         // Hiển thị danh sách tên sp
-        public JsonResult ListName(string q)
-		{
-            var data = new ProductDao().ListName(q);
-            return Json(new
-            {
-                data = data,
-             status = true,
-            }, JsonRequestBehavior.AllowGet);
-		}
         // Tìm kiếm sản phẩm
-        public ActionResult Search(string q, int page = 1, int pageSize = 12)
+        public ActionResult Search(string q, int page = 1, int pageSize = 20)
         {
             var dao = new ProductDao();
             var model = dao.Search(q, page, pageSize);
@@ -53,10 +55,14 @@ namespace LuxubuShop.Web.Controllers
             return View(model);
         }
         // Click Count
-        public ActionResult ClickCount(long id)
+        [HttpPost]
+        public JsonResult ClickCount(long id)
         {
-            var count = new ProductDao().ClickCount(id);
-            return RedirectToAction("Index","Content", count);
+            var result = new ProductDao().ClickCount(id);
+            return Json(new
+            {
+                count = result,
+            });
         }
     }
 }

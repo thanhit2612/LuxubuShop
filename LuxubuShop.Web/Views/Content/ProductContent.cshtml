@@ -7,46 +7,52 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="content">
-	<div class="content_top">
-		<div class="heading">
-			<h3>@product.Name</h3>
-		</div>
-		<div class="clear"></div>
+<div class="post">
+	<h3 class="title">
+		<span>@product.Name</span>
+		<img src="~/Assets/Client/assets/images/common/bg_title.png" class="title-image" alt="" />
+	</h3>
+	<div class="post-list">
+		@foreach (var item in Model)
+		{
+			var link = "/danh-gia/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+			<div class="post-item">
+				<div class="row">
+					<div class="col-xl-3">
+						<a href="@link" class="post-thumb">
+							<img src="@item.Image" alt="@item.Name" class="post-image" />
+						</a>
+					</div>
+					<div class="col-xl-9">
+						<div class="post-body">
+							<h4 class="post-name">@item.Name</h4>
+							<p class="post-des">
+								@item.Description
+							</p>
+							<a href="@link" class="post-details">
+								Xem thêm
+								<i class="fas fa-arrow-right"></i>
+							</a>
+							<ul class="post-meta">
+								<li class="post-meta-item">
+									<i class="fas fa-user-edit"> @item.CreatedBy</i>
+								</li>
+								<li class="post-meta-item">
+									<i class="fas fa-calendar-alt"> @string.Format("{0:dd/MM/yyyy}", item.CreatedDate)</i>
+								</li>
+								<li class="post-meta-item">
+									<i class="fas fa-eye"> @item.ViewCount</i>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
 	</div>
-	@foreach (var item in Model)
-	{
-		var link = "chi-tiet/" + item.MetaTitle + "-" + item.ID;
-		<div class="image group">
-			<div class="grid images_3_of_1">
-				<img src="@item.Image" alt="@item.Name" style="border-radius: 5px" />
-			</div>
-			<div class="grid news_desc">
-				<h3>
-					<a href="@link">
-						@item.Name
-					</a>
-				</h3>
-				<p>@item.Descriptions ...</p>
-				<p>
-					<a href="@link">View More</a>
-				</p>
-				<p>
-					<i class="fas fa-tags"></i>Tags:
-					<a href="@link">@item.Tags</a>
-				</p>
-				<p>
-					<i class="fas fa-user-edit"></i>Tác giả:
-					@item.CreatedBy | @string.Format("{0:dd-MM-yyyy}", item.CreatedDate)
-				</p>
-			</div>
-		</div>
-	}
-	<div class="content-pagenation">
-		<div class="pageList">
-			Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-			@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-		</div>
+	<div class="pageList">
+		@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 	</div>
 </div>
+
 

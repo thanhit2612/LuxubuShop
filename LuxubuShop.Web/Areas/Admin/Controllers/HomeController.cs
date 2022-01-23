@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LuxubuShop.Core.Dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace LuxubuShop.Web.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index()
         {
-            return View();
+            var model = new ProductCategoryDao().ListAll();
+            return View(model);
         }
     }
 }

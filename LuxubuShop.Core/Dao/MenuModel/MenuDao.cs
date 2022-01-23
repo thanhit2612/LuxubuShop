@@ -16,35 +16,21 @@ namespace LuxubuShop.Core.Dao
 			db = new LuxubuShopDbContext();
 		}
 		// Get Method By ID
-		public List<Menu> ListByGroupId(int groupId)
+		public List<Menu> ListAll()
 		{
-			return db.Menus.Where(x => x.TypeID == groupId && x.Status == true).OrderBy(x => x.DisplayOrder).ToList();
-		}
-
-		// Hiển thị danh sách
-		public IEnumerable<Menu> ListAllPaging(string searchString, int page, int pageSize)
-		{
-			IQueryable<Menu> model = db.Menus;
-			if (!string.IsNullOrEmpty(searchString))
-			{
-				model = model.Where(x => x.Text.Contains(searchString));
-			}
-			return model.OrderByDescending(x => x.Text).ToPagedList(page, pageSize);
+			return db.Menus.Where(x => x.Status == true).ToList();
 		}
 
 		// Insert Method
 		public long Insert(Menu menu)
 		{
+			menu.Status = true;
 			db.Menus.Add(menu);
 			db.SaveChanges();
 			return menu.ID;
 		}
 
 		// Update Method
-		public Menu ViewDetail(int id)
-		{
-			return db.Menus.Find(id);
-		}
 		public Menu GetMenuByID(long id)
 		{
 			return db.Menus.Find(id);
@@ -55,8 +41,9 @@ namespace LuxubuShop.Core.Dao
 			{
 				var menu = db.Menus.Find(entity.ID);
 				menu.Text = entity.Text;
-				menu.TypeID = entity.TypeID;
-				menu.Status = entity.Status;
+				menu.Link = entity.Link;
+				menu.Icon = entity.Icon;
+				menu.Status = true;
 
 				db.SaveChanges();
 				return true;

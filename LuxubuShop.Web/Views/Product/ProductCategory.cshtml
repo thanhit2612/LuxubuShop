@@ -1,0 +1,77 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<LuxubuShop.Core.EF.Product>
+
+
+@{
+	ViewBag.Title = "ProductCategory";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	var productCategory = (LuxubuShop.Core.EF.ProductCategory)ViewBag.ProductCategory;
+}
+
+
+<div class="product">
+	<h3 class="title">
+		<span>@productCategory.Name</span>
+		<img src="~/Assets/Client/assets/images/common/bg_title.png" class="title-image" alt="" />
+	</h3>
+	@if (Model.Count > 0)
+	{
+<div class="product-list">
+	@foreach (var item in Model)
+	{
+
+		var link = "/danh-gia/" + item.MetaTitle + "-" + item.ID;
+			<div class="product-item">
+				<div class="product-thumb">
+					<img src="@item.Image" class="product-image" alt="@item.Name" />
+					<div class="product-overlay">
+						<button class="btn btn--circle btn-like">
+							<a href="/them-yeu-thich?productId=@item.ID&quantity=1">
+								<i class="fas fa-heart"></i>
+							</a>
+						</button>
+					</div>
+				</div>
+				<div class="product-body">
+					<div class="product-review">
+						<div class="product-rating">
+							@for (int i = 0; i < item.Rating; i++)
+							{
+								<i class="fas fa-star"></i>
+							}
+							@for (int i = (item.Rating); i < 5; i++)
+							{
+								<i class="fas fa-star-half-alt"></i>
+							}
+						</div>
+						<i class="fas fa-eye"> @item.ViewCount</i>
+					</div>
+					<div class="product-info">
+						<div class="product-price">
+							<div class="product-price--old">
+								@(item.Price.HasValue ? item.Price.Value.ToString("N0"): "Liên hệ")₫
+							</div>
+							<div class="product-price--new">
+								@(item.Price.HasValue ? item.PromotionPrice.Value.ToString("N0"): "Liên hệ")₫
+							</div>
+						</div>
+						<h4 class="product-name">
+							<a href="@link">@item.Name</a>
+						</h4>
+					</div>
+					<div class="product-buy">
+						<a href="@item.ProductLink" class="btn btn-buy  product-counter" target="_blank" data-id="@item.ID">Mua sản phẩm</a>
+					</div>
+				</div>
+			</div>
+		
+	}
+</div>
+	}
+	else
+	{
+		<p style="text-align: center; font-size: 18px">Không có sản phẩm nào !</p>
+		<img src="~/Assets/Client/assets/images/common/Empty.png" alt="No products" class="empty-products" />
+	}
+</div>

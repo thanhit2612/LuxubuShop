@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using LuxubuShop.Core.EF;
+using LuxubuShop.Web.Common;
 
 namespace LuxubuShop.Web.Controllers
 {
@@ -28,8 +30,11 @@ namespace LuxubuShop.Web.Controllers
         // Chi tiết bài viết
         public ActionResult Details(long id)
         {
-            var content = new ContentDao().ViewDetail(id);
+            var content = new ContentDao().Detail(id);
+            ViewBag.ListRelatedContent = new ContentDao().ListRelatedContent(id, 10);
             ViewBag.Tags = new ContentDao().ListTag(id);
+
+
             return View(content);
         }
         // Lấy ra bài viết từ tags
@@ -39,5 +44,15 @@ namespace LuxubuShop.Web.Controllers
             ViewBag.Tag = new ContentDao().GetTag(tagId);
             return View(model);
 		}
+
+        [HttpPost]
+        public JsonResult ClickCount(long id)
+        {
+            var result = new ContentDao().ClickCount(id);
+            return Json(new
+            {
+                count = result,
+            });
+        }
     }
 }

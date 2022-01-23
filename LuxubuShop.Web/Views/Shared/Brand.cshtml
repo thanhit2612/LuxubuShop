@@ -1,0 +1,12 @@
+﻿@model List<LuxubuShop.Core.EF.Brand>
+
+
+@foreach (var item in Model)
+{
+	<div class="item">
+		<a href="@item.Link">
+			<img src="@item.Image" alt="@item.Name" class="brand-image" title="@item.Name"/>
+		</a>
+	</div>
+}
+

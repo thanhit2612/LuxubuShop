@@ -4,75 +4,52 @@
 }
 
 @section pageTitle{ Trang chủ }
+@section JsFooter{
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript">
+    $(function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+                        title: {
+                text: "Thống kế lượt xem sản phẩm"
+            },
+            animationEnabled: true,
+            legend: {
+                fontSize: 20,
+                fontFamily: "Helvetica"
+            },
+            theme: "light2",
+            data: [
+            {
+                type: "doughnut",
+                indexLabelFontFamily: "Garamond",
+                indexLabelFontSize: 20,
+                indexLabel: "{label} {y}%",
+                startAngle: -20,
+                showInLegend: true,
+                    toolTipContent: "{legendText} {y}%",
 
-<!-- Earnings (Monthly) Card Example -->
-<div class="row">
-	<div class="col-xl-3 col-md-6 mb-4">
-		<div class="card border-left-primary shadow h-100 py-2">
-			<div class="card-body">
-				<div class="row no-gutters align-items-center">
-					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-							Earnings (Monthly)
-						</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-					</div>
-					<div class="col-auto">
-						<i class="fas fa-calendar fa-2x text-gray-300"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-3 col-md-6 mb-4">
-		<div class="card border-left-warning shadow h-100 py-2">
-			<div class="card-body">
-				<div class="row no-gutters align-items-center">
-					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-							Earnings (Monthly)
-						</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-					</div>
-					<div class="col-auto">
-						<i class="fas fa-calendar fa-2x text-gray-300"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-3 col-md-6 mb-4">
-		<div class="card border-left-danger shadow h-100 py-2">
-			<div class="card-body">
-				<div class="row no-gutters align-items-center">
-					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-							Earnings (Monthly)
-						</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-					</div>
-					<div class="col-auto">
-						<i class="fas fa-calendar fa-2x text-gray-300"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-3 col-md-6 mb-4">
-		<div class="card border-left-success shadow h-100 py-2">
-			<div class="card-body">
-				<div class="row no-gutters align-items-center">
-					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-							Earnings (Monthly)
-						</div>
-						<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-					</div>
-					<div class="col-auto">
-						<i class="fas fa-calendar fa-2x text-gray-300"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+			    dataPoints: [
+					    { y: 40, legendText: "Thiết bị điện tử", label: "Thiết bị điện tử" },
+					    { y: 15, legendText: "Máy tính", label: "Máy tính" },
+					    { y: 10, legendText: "Mẹ và bé", label: "Mẹ và bé" },
+					    { y: 7, legendText: "Điện thoại!", label: "Điện thoại" },
+					    { y: 13, legendText: "Đồ gia dụng", label: "Đồ gia dụng" },
+					{ y: 5, legendText: "Giày dép", label: "Giày dép" },
+					{ y: 5, legendText: "Thời trang nam", label: "Thời trang nam" },
+					{ y: 5, legendText: "Thời trang nữ", label: "Thời trang nữ" }
+                    ],
+                @foreach (var item in Model)
+				{
+				}
+
+                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
+                //dataPoints: @Html.Raw(ViewBag.DataPoints),
+            }
+            ]
+        });
+        chart.render();
+    });
+	</script>
+}
+
+<div id="chartContainer"></div>

@@ -1,4 +1,5 @@
-﻿using LuxubuShop.Core.EF;
+﻿using Common;
+using LuxubuShop.Core.EF;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -20,16 +21,68 @@ namespace LuxubuShop.Core.Dao
 		{
 			return db.Users.SingleOrDefault(x => x.UserName == userName);
 		}
-		public bool Login(string userName, string password)
+		public int LoginAdmin(string userName, string passWord, bool isLoginAdmin = false)
 		{
-			var result = db.Users.Count(x => x.UserName == userName && x.Password == password);
-			if (result > 0)
+			var result = db.Users.SingleOrDefault(x => x.UserName == userName);
+			if (result == null)
 			{
-				return true;
+				return 0;
 			}
 			else
 			{
-				return false;
+				if (isLoginAdmin == true)
+				{
+					if (result.GroupID == CommonConstants.ADMIN_GROUP || result.GroupID == CommonConstants.MOD_GROUP)
+					{
+						if (result.Password == passWord)
+							return 1;
+						else
+							return -2;
+					}
+					else
+					{
+						return -3;
+					}
+				}
+				else
+				{
+					if (result.Password == passWord)
+						return 1;
+					else
+						return -2;
+				}
+			}
+		}
+		public int LoginUser(string userName, string passWord, bool isLoginAdmin = false)
+		{
+			var result = db.Users.SingleOrDefault(x => x.UserName == userName);
+			if (result == null)
+			{
+				return 0;
+			}
+			else
+			{
+				if (isLoginAdmin == true)
+				{
+					if (result.GroupID == CommonConstants.MEMBER_GROUP || (result.GroupID == CommonConstants.ADMIN_GROUP || result.GroupID == CommonConstants.MOD_GROUP))
+					{
+						if (result.Password == passWord)
+							return 1;
+						else
+							return -2;
+					}
+					else
+					{
+						return -3;
+					}
+				}
+				else
+				{
+					if (result.Password == passWord)
+						return 1;
+					else
+						return -2;
+				}
 			}
 		}
 		// Hiển thị danh sách
@@ -46,18 +99,9 @@ namespace LuxubuShop.Core.Dao
 		// Insert Method
 		public long Insert(User entity)
 		{
-			var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
-			if (user == null)
-			{
-				entity.CreatedDate = DateTime.Now;
-				db.Users.Add(entity);
-				db.SaveChanges();
-				return entity.ID;
-			}
-			else
-			{
-				return user.ID;
-			}
+			db.Users.Add(entity);
+			db.SaveChanges();
+			return entity.ID;
 		}
 		// Client User Insert Method 
 		public long InsertForFacebook(User entity)
@@ -65,6 +109,7 @@ namespace LuxubuShop.Core.Dao
 			var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
 			if (user == null)
 			{
+				user.Status = true;
 				db.Users.Add(entity);
 				db.SaveChanges();
 				return entity.ID;
@@ -75,6 +120,10 @@ namespace LuxubuShop.Core.Dao
 			}
 		}
 		// Update Method
+		public User GetById(int id)
+		{
+			return db.Users.Find(id);
+		}
 		public bool Update(User entity)
 		{
 			try
@@ -82,6 +131,7 @@ namespace LuxubuShop.Core.Dao
 				var user = db.Users.Find(entity.ID);
 				user.Name = entity.Name;
 				user.Email = entity.Email;
+				user.Status = true;
 				if (!string.IsNullOrEmpty(entity.Password))
 				{
 					user.Password = entity.Password;
@@ -94,10 +144,7 @@ namespace LuxubuShop.Core.Dao
 				return false;
 			}
 		}
-		public User ViewDetail(int id)
-		{
-			return db.Users.Find(id);
-		}
+
 
 		// Delete Method
 		public bool Delete(int id)
@@ -109,6 +156,31 @@ namespace LuxubuShop.Core.Dao
 				db.SaveChanges();
 				return true;
 
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool CheckUserName(string userName)
+		{
+			return db.Users.Count(x => x.UserName == userName) > 0;
+		}
+		public bool CheckEmail(string email)
+		{
+			return db.Users.Count(x => x.Email == email) > 0;
+		}
+		public bool ForgotPassWord(User entity)
+		{
+			try
+			{
+				var user = db.Users.Where(x => x.UserName == entity.UserName).SingleOrDefault();
+				user.UserName = entity.UserName;
+				user.Password = entity.Password;
+				user.Status = true;
+				db.SaveChanges();
+				return true;
 			}
 			catch (Exception)
 			{

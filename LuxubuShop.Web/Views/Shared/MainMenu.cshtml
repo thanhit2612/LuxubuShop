@@ -1,13 +1,8 @@
 ﻿@model List<LuxubuShop.Core.EF.Menu>
-<div class="menu">
-	<ul>
-		@foreach (var item in Model)
-		{
-			<li>
-				<a href="@item.Link" target="@item.Target">@item.Text</a>
-			</li>
-		}
-			<div class="clear"></div>
-	</ul>
-</div>
 
+@foreach (var item in Model)
+{
+	<li class="menu-item">
+		<a href="@item.Link" class="menu-link" target="_self">@item.Text</a>
+	</li>
+}

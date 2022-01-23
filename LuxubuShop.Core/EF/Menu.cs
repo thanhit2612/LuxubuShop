@@ -12,18 +12,15 @@ namespace LuxubuShop.Core.EF
         public int ID { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Tên menu")]
         public string Text { get; set; }
+
+        [StringLength(50)]
+        public string Icon { get; set; }
 
         [StringLength(250)]
         public string Link { get; set; }
 
-        public int? DisplayOrder { get; set; }
-
-        [StringLength(50)]
-        public string Target { get; set; }
-
-        public bool? Status { get; set; }
-
-        public int? TypeID { get; set; }
+        public bool Status { get; set; }
     }
 }

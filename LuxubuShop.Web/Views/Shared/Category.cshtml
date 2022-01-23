@@ -1,0 +1,12 @@
+﻿@model List<LuxubuShop.Core.EF.ProductCategory>
+
+@foreach (var item in Model)
+{
+	var link = "/san-pham/" + item.MetaTitle + "-" + item.ID;
+	<li class="navbar-item">
+		<a href="@link" class="navbar-link">
+			<img src="@item.Image" alt="@item.Name" class="navbar-image" />
+			<span class="navbar-name">@item.Name</span>
+		</a>
+	</li>
+}
